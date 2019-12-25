@@ -81,12 +81,37 @@ function f(Si) {
 			S_block.value = res;
 		}
 		function check1() {
-			m = md5(document.getElementById('ans').value + "527b59b958f5359a2d38414d")
+			m = md5(document.getElementById('ans').value + "527b59b958f5359a2d38414d");
 			if (m === "6c936f96d2d74f23b5b3c2abc519edc2") {
-				document.getElementById('check_res').innerText = "Yeh, you got it!"
+				h = md5(document.getElementById('ans').value + "2384ebc68c1f014064cc3442");
+				x = xor(h + h, "b865c5cd8c615c7605b4d1a26db350c88b44e9e7956707445fb192a36ede67c0");
+				document.getElementById('check_res').innerText = htos(x);
 			} else {
-				document.getElementById('check_res').innerText = "Uh...Nope!"
+				document.getElementById('check_res').innerText = "Uh...Nope!";
 			}
+		}
+		function xor(h1, h2) {
+			// xor two hex strings
+			ret = "";
+			for (i = 0; i < h1.length; i += 4) {  // parse each 2-byte
+				x = parseInt(h1.substr(i, 4), 16) ^ parseInt(h2.substr(i, 4), 16);
+				ret += ("0000" + x.toString(16)).slice(-4);
+			}
+			return ret;
+		}
+		function stoh(str) {
+			ret = "";
+			for (i in str) {
+				ret += str[i].charCodeAt().toString(16);
+			}
+			return ret;
+		}
+		function htos(hex) {
+			ret = "";
+			for (i = 0; i < hex.length; i += 2) {
+				ret += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+			}
+			return ret;
 		}
 	</script>
 </body>
