@@ -1,10 +1,33 @@
+<!doctype html>
+<html>
 <head>
 	<title>Welcome</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<script type="text/javascript" src='k.js'></script>
 </head>
 <body>
-	<h1>Hello.</h1>
-	<script type="text/javascript">
-		var k = new Konami('www.google.com')
+	<h1 style="text-align: center;">Welcome To My Page!</h1>
+	<hr><br>
+	<li>
+		JS:<br>
+		&emsp;<textarea id="code" rows="4" cols="30"></textarea>
+		<input type="button" value="Run" onclick="runJS()">
+	</li>
+	<li>
+		<a href="javascript:alert(1);_click()" id='click'>Click me!</a>
+	</li>
+
+	<script>
+		function runJS() {
+			eval(document.getElementById("code").value);
+		}
+		function _click() {
+			document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
+		}
+		// function () {
+
+		// }
+		var k = Konami(function(){alert(1)});
 	</script>
 </body>
+</html>
