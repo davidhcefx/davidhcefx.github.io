@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+	<title>Crypto:LCG</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<script type="text/javascript" src='src/md5.js'></script>
+	<style>
+		code {
+			font-size: 16px;
+		}
+		.HL {
+			background-color: #fffbe5;
+		}
+		.Playground {
+			border-style: ridge;
+			float: right;
+			width: 26%;
+			padding-left: 2%;
+			padding-right: 2%;
+		}
+	</style>
+</head>
+<body>
+	<h1>Linear Congruential Generator</h1>
+	<hr>
+	<p>The formula is as follows:</p>
+	<pre style="font-size: 16px;">
+function f(Si) {
+    return (a * Si + b) mod N
+}</pre>
+
+	<p>Basically, <code>a</code>, <code>b</code>, and <code>N</code> are the coefficients of the random number generator.<br>
+	In round 1, <code>S1</code> will be plugged in, and the output will become <code>S2</code>, which is the input of round 2. By gathering all the output numbers, we will have a sequence of random numbers.</p>
+	<p>The question is, can we crack this Random Number Generator (RNG)? That is, can we find out the coefficients <code>a</code>, <code>b</code>, and <code>N</code> by simply observing the generated outputs? Let's try it out:
+	</p>
+	<hr>
+
+	<div Class="Playground">
+	<h3> Playground </h3>
+	<p>
+		a = <input type="text" size="7" value=2 onblur="set('a', this.value)">,
+		b = <input type="text" size="7" value=7 onblur="set('b', this.value)">,
+		N = <input type="text" size="7" value=23 onblur="set('N', this.value)">
+		&emsp;<input type="button" value="Go" onclick="compute()" style="width: 44px;">
+	</p>
+	<p> Compute <code>(<span id="a">2</span> * <input type="text" size="5" id="S" value=1 style="text-align: center;"> + <span id="b">7</span>) mod <span id="N">23</span></code> :</p>
+	<p><textarea id="result" rows="6" style="width: 100%"></textarea></p>
+	</div>
+
+	<p>1. We already leaked two of them, <code class="HL">&nbsp;a = 12349876 </code> and <code class="HL">&nbsp;N = 43216789 </code>, please help us figure out <code>b</code> :</p>
+	
+	<p>These are the outputs we gathered:<br>
+	<code>
+		&emsp; Si&nbsp;&nbsp; = 22420384<br>
+		&emsp; Si+1 = 35602399<br>
+		&emsp; Si+2 = 25056787
+	</code></p>
+	<p>Once we figured out <code>b</code>, ALL the consecutive numbers generated would not be random anymore.<br>
+	If you think you've cracked it, please provide the next random number.</p>
+	<code>&emsp; Si+3 = <input type="text" size="9" id="ans"></code> <input type="button" value="Check" onclick="check1()">&emsp;<span id="check_res"></span>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<hr>
+	
+	
+	<script>
+		function set(id, value) {
+			document.getElementById(id).innerText = value;
+		}
+		function compute() {
+			a = parseInt(document.getElementById('a').innerText);
+			b = parseInt(document.getElementById('b').innerText);
+			N = parseInt(document.getElementById('N').innerText);
+			S_block = document.getElementById('S');
+			res = (a * parseInt(S_block.value) + b) % N;
+			document.getElementById('result').value += res + "\n";
+			S_block.value = res;
+		}
+		function check1() {
+			m = md5(document.getElementById('ans').value + "527b59b958f5359a2d38414d")
+			if (m === "6c936f96d2d74f23b5b3c2abc519edc2") {
+				document.getElementById('check_res').innerText = "Yeh, you got it!"
+			} else {
+				document.getElementById('check_res').innerText = "Uh...Nope!"
+			}
+		}
+	</script>
+</body>
+</html>

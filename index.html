@@ -12,10 +12,14 @@
 		JS:<br>
 		&emsp;<textarea id="code" rows="4" cols="30"></textarea>
 		<input type="button" value="Run" onclick="runJS()">
-	</li>
+	</li><br>
 	<li>
 		<a href="javascript:alert(1);_click()" id='click'>Click me!</a>
-	</li>
+	</li><br>
+	<li>
+		<a href="LCG.html">Linear Congruential Generator</a>
+	</li><br>
+
 
 	<script>
 		function runJS() {
@@ -24,8 +28,8 @@
 		function _click() {
 			document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
 		}
-		// function () {
-
+		// function lcg(a, b, N, s) {
+		// 	return (a * s + b) % N;
 		// }
 		var k = Konami(function(){alert(1)});
 	</script>
