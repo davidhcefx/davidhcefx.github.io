@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-	<title>Crypto:LCG</title>
+	<title>Crypto:Linear Congruential Generator</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<script type="text/javascript" src='src/md5.js'></script>
 	<style>
@@ -30,7 +30,7 @@ function f(Si) {
 }</pre>
 
 	<p>Basically, <code>a</code>, <code>b</code>, and <code>N</code> are the coefficients of the random number generator.<br>
-	In round 1, <code>S1</code> will be plugged in, and the output will become <code>S2</code>, which is the input of round 2. By gathering all the output numbers, we will have a sequence of random numbers.</p>
+	In round 1, <code>S1</code> will be plugged in, and the output will become <code>S2</code>, which is the input of round 2. By gathering all the outputs, we will have a sequence of random numbers.</p>
 	<p>The question is, can we crack this Random Number Generator (RNG)? That is, can we find out the coefficients <code>a</code>, <code>b</code>, and <code>N</code> by simply observing the generated outputs? Let's try it out:
 	</p>
 	<hr>
@@ -48,25 +48,44 @@ function f(Si) {
 	</div>
 
 	<p>1. We already leaked two of them, <code class="HL">&nbsp;a = 12349876 </code> and <code class="HL">&nbsp;N = 43216789 </code>, please help us figure out <code>b</code> :</p>
-	
 	<p>These are the outputs we gathered:<br>
 	<code>
-		&emsp; Si&nbsp;&nbsp; = 22420384<br>
-		&emsp; Si+1 = 35602399<br>
-		&emsp; Si+2 = 25056787
+		&emsp; Si&nbsp;&nbsp; = 34425850<br>
+		&emsp; Si+1 = 19828421<br>
+		&emsp; Si+2 = 40149722
 	</code></p>
-	<p>Once we figured out <code>b</code>, ALL the consecutive numbers generated would not be random anymore.<br>
+	<p>Once we figured out <code>b</code>, ALL the consecutive numbers generated would no no longer be "random" anymore!<br>
 	If you think you've cracked it, please provide the next random number.</p>
-	<code>&emsp; Si+3 = <input type="text" size="9" id="ans"></code> <input type="button" value="Check" onclick="check1()">&emsp;<span id="check_res"></span>
-	<br>
+	<code>&emsp; Si+3 = <input type="text" size="9" id="ans"></code> <input type="button" value="Check" onclick="check1()">&emsp;<span id="check_res_1"></span>
 	<br>
 	<br>
 	<br>
 	<br>
 	<br>
 	<hr>
-	
-	
+	<p>2. This time, we only leaked <code class="HL">&nbsp;N = 87879487 </code>, but I think it is still crackable!</p>
+	<p>Again, we have gathered some outputs:<br>
+	<code>
+		&emsp; Si&nbsp;&nbsp; = 30296335<br>
+		&emsp; Si+1 = 60248031<br>
+		&emsp; Si+2 = 23522917
+	</code></p>
+	<p>If you think you've cracked it, please provide the next random number:</p>
+	<code>&emsp; Si+3 = <input type="text" size="9" id="ans"></code> <input type="button" value="Check" onclick="check2()">&emsp;<span id="check_res_2"></span>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<hr>
+	<!--  solvable ?
+	67702636
+	36138443
+	62326253
+	68578233
+	80610932
+	12711352
+	91694468 -->
 	<script>
 		function set(id, value) {
 			document.getElementById(id).innerText = value;
@@ -79,16 +98,6 @@ function f(Si) {
 			res = (a * parseInt(S_block.value) + b) % N;
 			document.getElementById('result').value += res + "\n";
 			S_block.value = res;
-		}
-		function check1() {
-			m = md5(document.getElementById('ans').value + "527b59b958f5359a2d38414d");
-			if (m === "6c936f96d2d74f23b5b3c2abc519edc2") {
-				h = md5(document.getElementById('ans').value + "2384ebc68c1f014064cc3442");
-				x = xor(h + h, "b865c5cd8c615c7605b4d1a26db350c88b44e9e7956707445fb192a36ede67c0");
-				document.getElementById('check_res').innerText = htos(x);
-			} else {
-				document.getElementById('check_res').innerText = "Uh...Nope!";
-			}
 		}
 		function xor(h1, h2) {
 			// xor two hex strings
@@ -112,6 +121,36 @@ function f(Si) {
 				ret += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
 			}
 			return ret;
+		}
+		function check1() {
+			m = md5(document.getElementById('ans').value + "527b59b958f5359a2d38414d");
+			if (m === "ce4964edab6dc88198e913c9b1eb29bc") {
+				h = md5(document.getElementById('ans').value + "2384ebc68c1f014064cc3442");
+				x = xor(h + h, "43070a0beb30086682b241e783c7ab8370262621f2365354d8b702e680aa9c8b");
+				document.getElementById('check_res_1').innerText = htos(x);
+			} else {
+				document.getElementById('check_res_1').innerText = "Uh...Nope!";
+			}
+		}
+		function check2() {
+			m = md5(document.getElementById('ans').value + "7b3d3bdcc16607bfc4011dbd");
+			if (m === "34e618f23bfb66ac310307497237af53") {
+				h = md5(document.getElementById('ans').value + "a85b21a2620e31d0f938b120");
+				x = xor(h + h, "ab46259a7a6a1807bfa750d86715c966de3916e864402a5c85e216b769449e28");
+				document.getElementById('check_res_2').innerText = htos(x);
+			} else {
+				document.getElementById('check_res_2').innerText = "Not this one!";
+			}
+		}
+		function check3() {
+			m = md5(document.getElementById('ans').value + "9738c93165519764628bb872");
+			if (m === "ee01a553f0fadefc819002ce40245b6e") {
+				h = md5(document.getElementById('ans').value + "7fc618db0df41c2ebd27d430");
+				x = xor(h + h, "7b915d5decf4c0f7607a63cc44c6e44c0cea7445d8c8a69d136650ce43978846");
+				document.getElementById('check_res_3').innerText = htos(x);
+			} else {
+				document.getElementById('check_res_3').innerText = "Try again!";
+			}
 		}
 	</script>
 </body>
