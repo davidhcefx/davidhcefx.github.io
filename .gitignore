@@ -1,2 +1,3 @@
 # ignore .secrete files
 .secrete.flags
+.notes
