@@ -1,3 +1,7 @@
-# ignore .secrete files
+.gitignore
+
+# flags
 .secrete.flags
+
+# notes
 .notes
