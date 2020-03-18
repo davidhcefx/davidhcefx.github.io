@@ -57,7 +57,7 @@ function f(Si) {
 	</code></p>
 	<p>Once we figured out <code>b</code>, ALL the consecutive numbers generated would no no longer be "random" anymore!<br>
 	If you think you've cracked it, please provide the next random number.</p>
-	<code>&emsp; Si+3 = <input type="text" size="9" id="ans"></code> <input type="button" value="Check" onclick="check1()">&emsp;<span id="check_res_1"></span>
+	<code>&emsp; Si+3 = <input type="text" size="9" id="ans1"></code> <input type="button" value="Check" onclick="check1()">&emsp;<span id="check_res_1"></span>
 	<br>
 	<br>
 	<br>
@@ -72,7 +72,7 @@ function f(Si) {
 		&emsp; Si+2 = 23522917
 	</code></p>
 	<p>If you think you've cracked it, please provide the next random number:</p>
-	<code>&emsp; Si+3 = <input type="text" size="9" id="ans"></code> <input type="button" value="Check" onclick="check2()">&emsp;<span id="check_res_2"></span>
+	<code>&emsp; Si+3 = <input type="text" size="9" id="ans2"></code> <input type="button" value="Check" onclick="check2()">&emsp;<span id="check_res_2"></span>
 	<br>
 	<br>
 	<br>
@@ -124,9 +124,9 @@ function f(Si) {
 			return ret;
 		}
 		function check1() {
-			m = md5(document.getElementById('ans').value + "527b59b958f5359a2d38414d");
+			m = md5(document.getElementById('ans1').value + "527b59b958f5359a2d38414d");
 			if (m === "ce4964edab6dc88198e913c9b1eb29bc") {
-				h = md5(document.getElementById('ans').value + "2384ebc68c1f014064cc3442");
+				h = md5(document.getElementById('ans1').value + "2384ebc68c1f014064cc3442");
 				x = xor(h + h, "43070a0beb30086682b241e783c7ab8370262621f2365354d8b702e680aa9c8b");
 				document.getElementById('check_res_1').innerText = htos(x);
 			} else {
@@ -134,9 +134,9 @@ function f(Si) {
 			}
 		}
 		function check2() {
-			m = md5(document.getElementById('ans').value + "7b3d3bdcc16607bfc4011dbd");
+			m = md5(document.getElementById('ans2').value + "7b3d3bdcc16607bfc4011dbd");
 			if (m === "34e618f23bfb66ac310307497237af53") {
-				h = md5(document.getElementById('ans').value + "a85b21a2620e31d0f938b120");
+				h = md5(document.getElementById('ans2').value + "a85b21a2620e31d0f938b120");
 				x = xor(h + h, "ab46259a7a6a1807bfa750d86715c966de3916e864402a5c85e216b769449e28");
 				document.getElementById('check_res_2').innerText = htos(x);
 			} else {
@@ -144,9 +144,9 @@ function f(Si) {
 			}
 		}
 		function check3() {
-			m = md5(document.getElementById('ans').value + "9738c93165519764628bb872");
+			m = md5(document.getElementById('ans3').value + "9738c93165519764628bb872");
 			if (m === "ee01a553f0fadefc819002ce40245b6e") {
-				h = md5(document.getElementById('ans').value + "7fc618db0df41c2ebd27d430");
+				h = md5(document.getElementById('ans3').value + "7fc618db0df41c2ebd27d430");
 				x = xor(h + h, "7b915d5decf4c0f7607a63cc44c6e44c0cea7445d8c8a69d136650ce43978846");
 				document.getElementById('check_res_3').innerText = htos(x);
 			} else {
