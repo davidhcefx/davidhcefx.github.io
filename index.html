@@ -5,6 +5,7 @@
     <link rel="icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <script type="text/javascript" src='src/k.js'></script>
+    <script>Konami(function(){alert(1)});</script>
     <style type="text/css">
         .Work {
             background-color: #edffffff;
@@ -67,26 +68,41 @@
     <hr>
     <ul>
     <li>
-        <a href="javascript:alert(1);_click()" id='click'>Click me!</a>
-    </li><br>
+        <p><a href="javascript:alert(1);_click()" id='click'>Click me!</a></p>
+    </li>
     <li>
-    Feed me JS:<br>
-    &emsp;<textarea id="code" rows="4" cols="30"></textarea>
-    <input type="button" value="Run" onclick="runJS()">
-    </li><br>
+        <textarea id="jscode" rows="4" cols="30" placeholder="I want to run JS now!"></textarea>
+        <input type="button" value="Run" onclick="runJS()">
+    </li>
     <li>
-        <a href="LCG.html">Linear Congruential Generator</a>
+        <p><a href="LCG.html">Linear Congruential Generator</a></p>
+    </li>
+    <li>
+        <p><a href="https://highlightjs.org/">highlight.js</a> Online Tester:</p>
+        <p>
+            <textarea id="tbh-text" rows="4" cols="30" placeholder="Text to be highlighted"></textarea>
+            <textarea id="brush" rows="1" cols="10" placeholder="Language"></textarea>
+            <input type="button" value="Go" onclick="test()">
+        </p>
+        <div id='hl-display'></div>
     </li><br>
     </ul>
 
     <script>
+        (function greeting() {
+            console.log(Date());
+            fetch('https://www.google.com').then(r=> r.json().then(j=> console.log(j)));
+            // 'https://ipapi.co/json/'
+        })()
         function _click() {
             document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
         }
         function runJS() {
-            eval(document.getElementById("code").value);
+            eval(document.getElementById("jscode").value);
         }
-        var k = Konami(function(){alert(1)});
+        function test() {
+            var a = 1;
+        }
     </script>
 </body>
 </html>
