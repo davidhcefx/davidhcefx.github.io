@@ -89,11 +89,15 @@
     </ul>
 
     <script>
+        document.domain = 'davidhcefx.github.io';
         (function greeting() {
             console.log(Date());
-            fetch('https://ipapi.co/json/')
-                .then(async r=> console.log(await r.text()))
-                .catch(e=> console.error(e));
+            // fetch('https://ipapi.co/json/')
+            //     .then(async r=> console.log(await r.text()))
+            //     .catch(e=> console.error(e));
+            fetch('https://www.cloudflare.com/cdn-cgi/trace').then(async r=> console.log(await r.text()))
+            fetch('https://api.hackertarget.com/geoip/?q=114.38.104.20').then(async r=> console.log(await r.text()))
+            fetch('https://api.ipdata.co').then(async r=> console.log(await r.text()))
         })()
         function _click() {
             document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
