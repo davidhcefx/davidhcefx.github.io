@@ -91,8 +91,9 @@
     <script>
         (function greeting() {
             console.log(Date());
-            fetch('https://www.google.com').then(r=> r.json().then(j=> console.log(j)));
-            // 'https://ipapi.co/json/'
+            fetch('https://ipapi.co/json/')
+                .then(async r=> console.log(await r.text()))
+                .catch(e=> console.error(e));
         })()
         function _click() {
             document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
