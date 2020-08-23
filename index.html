@@ -66,6 +66,7 @@
 
     <h2>Toys</h2>
     <hr>
+    <div id='hl-result'></div>
     <ul>
     <li>
         <p><a href="javascript:alert(1);_click()" id='click'>Click me!</a></p>
@@ -80,33 +81,50 @@
     <li>
         <p><a href="https://highlightjs.org/">highlight.js</a> Online Tester:</p>
         <p>
-            <textarea id="tbh-text" rows="4" cols="30" placeholder="Text to be highlighted"></textarea>
-            <textarea id="brush" rows="1" cols="10" placeholder="Language"></textarea>
-            <input type="button" value="Go" onclick="test()">
+            <textarea id="hl-text" rows="8" cols="50" placeholder="Text to be highlighted"></textarea>
+            <textarea id="hl-brush" rows="1" cols="10" placeholder="eg. bash"></textarea>
+            <input type="button" value="Go" onclick="hl_go()">
         </p>
-        <div id='hl-display'></div>
-    </li><br>
+    </li>
     </ul>
+    <br><br><br><br><br><br><br><br><br>
 
     <script>
-        document.domain = 'davidhcefx.github.io';
-        (function greeting() {
-            console.log(Date());
-            // fetch('https://ipapi.co/json/')
-            //     .then(async r=> console.log(await r.text()))
-            //     .catch(e=> console.error(e));
-            fetch('https://www.cloudflare.com/cdn-cgi/trace').then(async r=> console.log(await r.text()))
-            fetch('https://api.hackertarget.com/geoip/?q=114.38.104.20').then(async r=> console.log(await r.text()))
-            fetch('https://api.ipdata.co').then(async r=> console.log(await r.text()))
-        })()
+        ~function() {
+            function getval(str, sep) {
+                // get value from 'key sep (space) value (space)'
+                return str.split(sep)[1].trim();
+            }
+            fetch('https://www.cloudflare.com/cdn-cgi/trace')
+            .then(async function(res) {
+                let ip = getval(String(await res.text()).split('\n')[2], '=');
+                fetch('https://api.hackertarget.com/geoip/?q=' + ip)
+                .then(async function(res) {
+                    var arr = [];
+                    for (line of String(await res.text()).split('\n')) {
+                        arr.push(getval(line, ':'))
+                    }
+                    console.log(
+                        `You visited this site on ${Date()}, using ${ip} from ` +
+                        `${arr[1]}, ${arr[2]}, ${arr[3]} (${arr[4]}, ${arr[5]})`);
+                })
+            })
+        }()
         function _click() {
             document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
         }
         function runJS() {
             eval(document.getElementById("jscode").value);
         }
-        function test() {
-            var a = 1;
+        function hl_go() {
+            let text = document.getElementById('hl-text').value;
+            let brush = document.getElementById('hl-brush').value;
+            // let html = '<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/monokai-sublime.min.css"></head><body>aaa</body></html>'
+            let html = '<html><head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/monokai-sublime.min.css"'
+                + '><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"><'
+                + '/script><script>hljs.initHighlightingOnLoad();<'
+                + `/script></head><body><pre><code class="${brush}">${text}</code></pre></body></html>`;
+            document.getElementById('hl-result').innerHTML = `<iframe width=50% height=350 style="float:right" srcdoc='${html}'></iframe>`;
         }
     </script>
 </body>
