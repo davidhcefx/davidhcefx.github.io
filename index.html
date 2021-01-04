@@ -3,10 +3,14 @@
 <head>
     <title>Welcome</title>
     <link rel="icon" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <script type="text/javascript" src='src/k.js'></script>
     <script>Konami(function(){alert(1)});</script>
     <style type="text/css">
+        body {
+            margin: 1% 1% 0 1%;
+        }
         .Work {
             background-color: #edffffff;
             position: relative;
@@ -19,19 +23,23 @@
     </style>
 </head>
 <body>
-    <h2>Who am I?</h2>
+    <h3>Who am I?</h3>
     <hr>
-    <h3><a href="https://github.com/davidhcefx">davidhcefx <img src="res/GitHub-Mark-32px.png" width="20px"></a> <img src="res/Taiwan_map.jpg" width="200" align="right" style="border-radius: 8px"></h3>
-    <p>A student from Taiwan who loves computer science.</p>
+    <p>
+        <a href="https://github.com/davidhcefx"><b>davidhcefx</b> <img src="res/GitHub-Mark-32px.png" height="20px" style="margin-bottom: 5px"></a>
+        <i style="font-family: 'Times New Roman', serif;"> , A student from Taiwan who loves computer science.</i>
+        <img src="res/Taiwan_map.jpg" width="200" align="right" style="border-radius: 8px">
+    </p>
+    <p><button type="button" class="btn btn-outline-warning">My Github Activities</button></p>
     <br>
-    
-    <h2>Works</h2>
+
+    <h3>Works</h3>
     <hr>
     <div class="Work">
         <img src="res/identicon.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
         <div class="Description">
             <br>
-            <h3><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h3>
+            <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h5>
             <p>An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how Github generates each user's Identicon, it's not too hard to make one. :-)</p>
         </div>
     </div>
@@ -40,7 +48,7 @@
         <img src="res/messagebox.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
         <div class="Description">
             <br>
-            <h3><a href="https://github.com/davidhcefx/Windows-MessageBox-for-Cmd">Windows MessageBox for Cmd</a></h3>
+            <h5><a href="https://github.com/davidhcefx/Windows-MessageBox-for-Cmd">Windows MessageBox for Cmd</a></h5>
             <p>This is a Cmd tool, which is in fact just a Cpp wrapper, that utilizes the MessageBox WinAPI. It lets people create a pop-up message box with ease.</p>
         </div>
     </div>
@@ -49,7 +57,7 @@
         <img src="res/trash.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
         <div class="Description">
             <br>
-            <h3><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h3>
+            <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
             <p>Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.</p>
         </div>
     </div>
@@ -58,13 +66,13 @@
         <img src="res/nano.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
         <div class="Description">
             <br>
-            <h3><a href="https://github.com/davidhcefx/nano-4.8_modified">nano-4.8 (modified)</a></h3>
+            <h5><a href="https://github.com/davidhcefx/nano-4.8_modified">nano-4.8 (modified)</a></h5>
             <p>Now, Ctrl + Backspace can delete a word backwards! (which is already supported in most of the browsers, editors, file explorers, etc. Everywhere!) It's not officially supported on Ubuntu and most Linux platforms.</p>
         </div>
     </div>
     <br>
 
-    <h2>Toys</h2>
+    <h3>Toys</h3>
     <hr>
     <iframe id='hl-result' srcdoc='' width=50% height=350 style="float:right" hidden></iframe>
     <ul>
