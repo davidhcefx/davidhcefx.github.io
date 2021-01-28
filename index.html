@@ -129,11 +129,11 @@
         function hl_go() {
             let text = document.getElementById('hl-text').value;
             let brush = document.getElementById('hl-brush').value;
+            var reminder = document.getElementById('hl-reminder');
             let libname = hl_get_libname(brush);
             let dependency = hl_get_dependency(libname);
             // check if libname is a default library
             if (libname !== undefined) {
-                var reminder = document.getElementById('hl-reminder');
                 reminder.innerHTML = `<p>Reminder: '${brush}' is not within the default `
                     + '<a href="https://highlightjs.org/download/">38 languages</a> '
                     + 'contained in the prebuilt CDN.</p><p>Be sure to include '
@@ -142,6 +142,8 @@
                     reminder.innerHTML += '<p>... as well as its dependencies <b>'
                         + dependency.join("</b>, <b>") + '</b>.</p>';
                 }
+            } else {
+                reminder.innerHTML = "";
             }
             var html = '<html><head>'
                 + `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/styles/monokai-sublime.min.css">`
