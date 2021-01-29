@@ -91,6 +91,7 @@
         <p>
             <textarea id="hl-text" rows="8" cols="50" placeholder="Text to be highlighted"></textarea>
             <textarea id="hl-brush" rows="1" cols="10" placeholder="eg. bash"></textarea>
+            <textarea id="hl-style" rows="1" cols="15" placeholder="monokai-sublime"></textarea>
             <input type="button" value="Go" onclick="hl_go()">
             <div id='hl-reminder'></div>
         </p>
@@ -129,6 +130,7 @@
         function hl_go() {
             let text = document.getElementById('hl-text').value;
             let brush = document.getElementById('hl-brush').value;
+            let style = document.getElementById('hl-style').value || "monokai-sublime";
             var reminder = document.getElementById('hl-reminder');
             let libname = hl_get_libname(brush);
             let dependency = hl_get_dependency(libname);
@@ -146,7 +148,7 @@
                 reminder.innerHTML = "";
             }
             var html = '<html><head>'
-                + `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/styles/monokai-sublime.min.css">`
+                + `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/styles/${style}.min.css">`
                 + `<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/highlight.min.js"><`
                 + '/script>';
             if (libname !== undefined) {
