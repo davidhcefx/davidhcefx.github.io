@@ -174,7 +174,7 @@
                 }
             }
             html += `<script>hljs.initHighlightingOnLoad();\x3c/script>
-                </head><body><pre><code class="${brush}">${code}
+                </head><body><pre><code class="${brush}">${escape_tags(code)}
                 </code></pre>\x3c/body>\x3c/html>`;
             const res = document.getElementById('highlight-result');
             res.hidden = false;
@@ -182,6 +182,9 @@
         }
         function js_to_minjs(url) {
             return url.replace(/.js$/, '.min.js');
+        }
+        function escape_tags(str) {
+            return str.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         }
         // return undefined if libname is a default library
         function hl_get_libname(brush) {
