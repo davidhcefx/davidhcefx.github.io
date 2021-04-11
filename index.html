@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Welcome</title>
+    <title>Welcome | davidhcefx</title>
     <link rel="icon" href="favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -11,14 +11,31 @@
         body {
             margin: 1% 1% 0 1%;
         }
+        i {
+            font-family: 'Times New Roman', serif;
+        }
+        #Taiwan-map {
+            width: 200px;
+            border-radius: 8px;
+            float: right;
+        }
         .Work {
             background-color: #edffffff;
-            position: relative;
+            display: flex;
         }
-        .Description {
-            position: absolute;
-            top: 0px;
-            left: 190px
+        .Work > img {
+            width: 160px;
+            border: 2px solid #aaa;
+            border-radius: 8px;
+        }
+        .Work > div {
+            align-self: center;
+            margin-left: 30px
+        }
+        #highlight-result {
+            width: 50%;
+            height: 350px;
+            float: right;
         }
     </style>
 </head>
@@ -26,27 +43,27 @@
     <h3>Who am I?</h3>
     <hr>
     <p>
-        <a href="https://github.com/davidhcefx"><b>davidhcefx</b> <img src="res/GitHub-Mark-32px.png" height="20px" style="margin-bottom: 5px"></a>
-        <i style="font-family: 'Times New Roman', serif;"> , A student from Taiwan who loves computer science.</i>
-        <img src="res/Taiwan_map.jpg" width="200" align="right" style="border-radius: 8px">
+        <a href="https://github.com/davidhcefx"><b>davidhcefx</b> <img src="res/GitHub-Mark-32px.png" style="height:20px; margin-bottom:5px"></a><i> , A student from Taiwan who loves computer science.</i>
+        <img src="res/Taiwan_map.jpg" id="Taiwan-map">
     </p>
-    <p><a href="github.html" class="btn btn-outline-warning">My Github Activities</a></p>
+    <p>
+        <a href="github.html" class="btn btn-outline-warning">My Github Activities</a>
+    </p>
     <br>
 
     <h3>Works</h3>
     <hr>
     <div class="Work">
-        <img src="res/identicon.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
-        <div class="Description">
-            <br>
+        <img src="res/identicon.png">
+        <div>
             <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h5>
             <p>An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how Github generates each user's Identicon, it's not too hard to make one. :-)</p>
         </div>
     </div>
     <br>
     <div class="Work">
-        <img src="res/messagebox.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
-        <div class="Description">
+        <img src="res/messagebox.png">
+        <div>
             <br>
             <h5><a href="https://github.com/davidhcefx/Windows-MessageBox-for-Cmd">Windows MessageBox for Cmd</a></h5>
             <p>This is a Cmd tool, which is in fact just a Cpp wrapper, that utilizes the MessageBox WinAPI. It lets people create a pop-up message box with ease.</p>
@@ -54,8 +71,8 @@
     </div>
     <br>
     <div class="Work">
-        <img src="res/trash.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
-        <div class="Description">
+        <img src="res/trash.png">
+        <div>
             <br>
             <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
             <p>Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.</p>
@@ -63,120 +80,117 @@
     </div>
     <br>
     <div class="Work">
-        <img src="res/nano.png" width="160" style="border: 2px solid #aaa; border-radius: 8px">
-        <div class="Description">
+        <img src="res/nano.png">
+        <div>
             <br>
             <h5><a href="https://github.com/davidhcefx/nano-4.8_modified">nano-4.8 (modified)</a></h5>
             <p>Now, Ctrl + Backspace can delete a word backwards! (which is already supported in most of the browsers, editors, file explorers, etc. Everywhere!) It's not officially supported on Ubuntu and most Linux platforms.</p>
         </div>
     </div>
-    <br>
+    <br><br>
 
     <h3>Toys</h3>
     <hr>
-    <iframe id='hl-result' srcdoc='' width=50% height=350 style="float:right" hidden></iframe>
+    <iframe id='highlight-result' srcdoc='' hidden></iframe>
     <ul>
-    <li>
-        <p><a href="javascript:alert(1);_click()" id='click'>Click me!</a></p>
-    </li>
-    <li>
-        <textarea id="jscode" rows="4" cols="30" placeholder="I want to run JS now!"></textarea>
-        <input type="button" value="Run" onclick="runJS()">
-    </li>
-    <li>
-        <p><a href="LCG.html">Linear Congruential Generator</a></p>
-    </li>
-    <li>
-        <p><a href="https://highlightjs.org/">highlight.js</a> Online Testing Tool:</p>
-        <p>
-            <textarea id="hl-text" rows="8" cols="50" placeholder="Text to be highlighted"></textarea>
-            <textarea id="hl-brush" rows="1" cols="10" placeholder="eg. bash"></textarea>
-            <textarea id="hl-style" rows="1" cols="15" placeholder="monokai-sublime"></textarea>
-            <input type="button" value="Go" onclick="hl_go()">
-            <div id='hl-reminder'></div>
-        </p>
-    </li>
+        <li>
+            <p><a href="javascript:alert(1);_click()" id='click'>Click me!</a></p>
+        </li>
+        <li>
+            <textarea id="jscode" rows="3" cols="30" placeholder="I want to run JS now!"></textarea>
+            <input type="button" value="Run" onclick="eval(document.querySelector('#jscode').value)">
+        </li>
+        <li>
+            <p><a href="LCG.html">Linear Congruential Generator</a></p>
+        </li>
+        <li>
+            <p><a href="https://highlightjs.org/">highlight.js</a> Online Testing Tool:</p>
+            <p>
+                <textarea id="hl-code" rows="8" cols="50" placeholder="Code to be highlighted"></textarea>
+                <textarea id="hl-brush" rows="1" cols="10" placeholder="auto"></textarea>
+                <textarea id="hl-style" rows="1" cols="15" placeholder="monokai-sublime"></textarea>
+                <input type="button" value="Go" onclick="hl_go()">
+                <div id='hl-reminder'></div>
+            </p>
+        </li>
     </ul>
     <br><br><br><br><br><br><br><br><br>
 
     <script>
+        // get value from 'key sep [space] value [space]'
         function getval(str, sep) {
-            // get value from 'key sep (space) value (space)'
             return str.split(sep)[1].trim();
         }
         ~function greetings() {
             fetch('https://www.cloudflare.com/cdn-cgi/trace')
             .then(async function(res) {
-                let ip = getval(String(await res.text()).split('\n')[2], '=');
+                const ip = getval(String(await res.text()).split('\n')[2], '=');
                 fetch('https://api.hackertarget.com/geoip/?q=' + ip)
                 .then(async function(res) {
-                    var arr = [];
-                    for (line of String(await res.text()).split('\n')) {
-                        arr.push(getval(line, ':'))
-                    }
+                    const val = String(await res.text())
+                                .split('\n')
+                                .map(line => getval(line, ":"));
                     console.log(
-                        `You visited this site on ${Date()}, using ${ip} from ` +
-                        `${arr[1]}, ${arr[2]}, ${arr[3]} (${arr[4]}, ${arr[5]})`);
+                        `You visited this site on ${Date()}, using ${ip} from `
+                        + `${val[1]}, ${val[2]}, ${val[3]} (${val[4]}, ${val[5]}).`
+                    );
                 })
             })
         }()
         function _click() {
             document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
         }
-        function runJS() {
-            eval(document.getElementById("jscode").value);
-        }
-        let CDN_VER = '10.5.0';
+        const CDN_VER = '10.5.0';
+        const CDN = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}`;
         function hl_go() {
-            let text = document.getElementById('hl-text').value;
-            let brush = document.getElementById('hl-brush').value;
-            let style = document.getElementById('hl-style').value || "monokai-sublime";
-            var reminder = document.getElementById('hl-reminder');
-            let libname = hl_get_libname(brush);
-            let dependency = hl_get_dependency(libname);
-            // check if libname is a default library
-            if (libname !== undefined) {
-                reminder.innerHTML = `<p>Reminder: '${brush}' is not within the default `
-                    + '<a href="https://highlightjs.org/download/">38 languages</a> '
-                    + 'contained in the prebuilt CDN.</p><p>Be sure to include '
-                    + `<b>${libname}</b> if you are using highlight.js from CDN.</p>`;
+            const code = document.getElementById('hl-code').value;
+            const brush = document.getElementById('hl-brush').value;
+            const style = document.getElementById('hl-style').value || "monokai-sublime";
+            const reminder = document.getElementById('hl-reminder');
+            const libname = hl_get_libname(brush);  // may be undefined
+            const dependency = hl_get_dependency(libname);  // may be undefined
+            var html = "";
+            if (libname !== undefined) {  // if not a default library
+                html = `<p>※ Reminder: '${brush}' is not within the default
+                    <a href="https://highlightjs.org/download/">38 languages</a>
+                    contained in the prebuilt CDN.<br>Be sure to include
+                    <b>${libname}</b> if you are using highlight.js from CDN.`;
                 if (dependency !== undefined) {
-                    reminder.innerHTML += '<p>... as well as its dependencies <b>'
-                        + dependency.join("</b>, <b>") + '</b>.</p>';
+                    html += `<br>... as well as its dependencies
+                        <b>${dependency.join("</b>, <b>")}</b>.`;
                 }
-            } else {
-                reminder.innerHTML = "";
+                html += '</p>';
             }
-            var html = '<html><head>'
-                + `<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/styles/${style}.min.css">`
-                + `<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/highlight.min.js"><`
-                + '/script>';
+            reminder.innerHTML = html;
+            html = `<html><head>
+                <link rel="stylesheet" href="${CDN}/styles/${style}.min.css">
+                <script src="${CDN}/highlight.min.js">\x3c/script>`;
             if (libname !== undefined) {
-                html += `<script src="${hl_lib_url(libname)}"><` + '/script>';
+                html += `<script src="${CDN}/${js_to_minjs(libname)}">\x3c/script>`;
             }
             if (dependency !== undefined) {
                 for (dep of dependency) {
-                    html += `<script src="${hl_lib_url(dep)}"><` + '/script>';
+                    html += `<script src="${CDN}/${js_to_minjs(dep)}">\x3c/script>`;
                 }
             }
-            html += '<script>hljs.initHighlightingOnLoad();<'
-                + `/script></head><body><pre><code class="${brush}">${text}`
-                + '</code></pre></body></html>';
-            let res = document.getElementById('hl-result');
+            html += `<script>hljs.initHighlightingOnLoad();\x3c/script>
+                </head><body><pre><code class="${brush}">${code}
+                </code></pre>\x3c/body>\x3c/html>`;
+            const res = document.getElementById('highlight-result');
             res.hidden = false;
             res.srcdoc = html;
         }
-        function hl_lib_url(libname) {
-            return `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}/languages/${libname.replace(/.js$/, '.min.js')}`
+        function js_to_minjs(url) {
+            return url.replace(/.js$/, '.min.js');
         }
+        // return undefined if libname is a default library
         function hl_get_libname(brush) {
-            // return undefined if libname is a default library
-            // Mapping generated by:
-            // - https://gist.github.com/davidhcefx/74950e34dfb8a5cea38bf0212c144769
+            /* Mapping generated by: https://gist.github.com/davidhcefx/74950e34dfb8a5cea38bf0212c144769 */
             return {
                 '1c': '1c.js', 'abnf': 'abnf.js', 'accesslog': 'accesslog.js', 'actionscript': 'actionscript.js', 'as': 'actionscript.js', 'ada': 'ada.js', 'angelscript': 'angelscript.js', 'asc': 'angelscript.js', 'applescript': 'applescript.js', 'osascript': 'applescript.js', 'arcade': 'arcade.js', 'arduino': 'arduino.js', 'ino': 'arduino.js', 'armasm': 'armasm.js', 'arm': 'armasm.js', 'asciidoc': 'asciidoc.js', 'adoc': 'asciidoc.js', 'aspectj': 'aspectj.js', 'autohotkey': 'autohotkey.js', 'ahk': 'autohotkey.js', 'autoit': 'autoit.js', 'avrasm': 'avrasm.js', 'awk': 'awk.js', 'axapta': 'axapta.js', 'basic': 'basic.js', 'bnf': 'bnf.js', 'brainfuck': 'brainfuck.js', 'bf': 'brainfuck.js', 'cal': 'cal.js', 'capnproto': 'capnproto.js', 'capnp': 'capnproto.js', 'ceylon': 'ceylon.js', 'clean': 'clean.js', "clean','icl','dcl": 'clean.js', 'clojure-repl': 'clojure-repl.js', 'clojure': 'clojure.js', 'clj': 'clojure.js', 'cmake': 'cmake.js', 'cmake.in': 'cmake.js', 'coq': 'coq.js', 'cos': 'cos.js', '"cos"': 'cos.js', '"cls"': 'cos.js', 'crmsh': 'crmsh.js', 'crm': 'crmsh.js', 'pcmk': 'crmsh.js', 'crystal': 'crystal.js', 'cr': 'crystal.js', 'csp': 'csp.js', 'd': 'd.js', 'dart': 'dart.js', 'delphi': 'delphi.js', 'dpr': 'delphi.js', 'dfm': 'delphi.js', 'pas': 'delphi.js', 'pascal': 'delphi.js', 'freepascal': 'delphi.js', 'lazarus': 'delphi.js', 'lpr': 'delphi.js', 'lfm': 'delphi.js', 'django': 'django.js', 'jinja': 'django.js', 'dns': 'dns.js', 'bind': 'dns.js', 'zone': 'dns.js', 'dockerfile': 'dockerfile.js', 'docker': 'dockerfile.js', 'dos': 'dos.js', 'bat': 'dos.js', 'cmd': 'dos.js', 'dsconfig': 'dsconfig.js', 'dts': 'dts.js', 'dust': 'dust.js', 'dst': 'dust.js', 'ebnf': 'ebnf.js', 'elixir': 'elixir.js', 'elm': 'elm.js', 'erb': 'erb.js', 'erlang-repl': 'erlang-repl.js', 'erlang': 'erlang.js', 'erl': 'erlang.js', 'excel': 'excel.js', 'xlsx': 'excel.js', 'xls': 'excel.js', 'fix': 'fix.js', 'flix': 'flix.js', 'fortran': 'fortran.js', 'f90': 'fortran.js', 'f95': 'fortran.js', 'fsharp': 'fsharp.js', 'fs': 'fsharp.js', 'gams': 'gams.js', 'gms': 'gams.js', 'gauss': 'gauss.js', 'gss': 'gauss.js', 'gcode': 'gcode.js', 'nc': 'gcode.js', 'gherkin': 'gherkin.js', 'feature': 'gherkin.js', 'glsl': 'glsl.js', 'gml': 'gml.js', 'GML': 'gml.js', 'golo': 'golo.js', 'gradle': 'gradle.js', 'groovy': 'groovy.js', 'haml': 'haml.js', 'handlebars': 'handlebars.js', 'hbs': 'handlebars.js', 'html.hbs': 'handlebars.js', 'html.handlebars': 'handlebars.js', 'htmlbars': 'htmlbars.js', 'haskell': 'haskell.js', 'hs': 'haskell.js', 'haxe': 'haxe.js', 'hx': 'haxe.js', 'hsp': 'hsp.js', 'hy': 'hy.js', 'hylang': 'hy.js', 'inform7': 'inform7.js', 'i7': 'inform7.js', 'irpf90': 'irpf90.js', 'isbl': 'isbl.js', '"isbl"': 'isbl.js', 'jboss-cli': 'jboss-cli.js', 'wildfly-cli': 'jboss-cli.js', 'julia-repl': 'julia-repl.js', 'jldoctest': 'julia-repl.js', 'julia': 'julia.js', 'lasso': 'lasso.js', 'ls': 'livescript.js', 'lassoscript': 'lasso.js', 'latex': 'latex.js', 'tex': 'latex.js', 'ldif': 'ldif.js', 'leaf': 'leaf.js', 'lisp': 'lisp.js', 'livecodeserver': 'livecodeserver.js', 'livescript': 'livescript.js', 'llvm': 'llvm.js', 'lsl': 'lsl.js', 'mathematica': 'mathematica.js', 'mma': 'mathematica.js', 'wl': 'mathematica.js', 'matlab': 'matlab.js', 'maxima': 'maxima.js', 'mel': 'mel.js', 'mercury': 'mercury.js', 'm': 'mercury.js', 'moo': 'mercury.js', 'mipsasm': 'mipsasm.js', 'mips': 'mipsasm.js', 'mizar': 'mizar.js', 'mojolicious': 'mojolicious.js', 'monkey': 'monkey.js', 'moonscript': 'moonscript.js', 'moon': 'moonscript.js', 'n1ql': 'n1ql.js', 'nim': 'nim.js', 'nix': 'nix.js', '"nixos"': 'nix.js', 'nsis': 'nsis.js', 'ocaml': 'ocaml.js', 'ml': 'sml.js', 'openscad': 'openscad.js', 'scad': 'openscad.js', 'oxygene': 'oxygene.js', 'parser3': 'parser3.js', 'pf': 'pf.js', 'pf.conf': 'pf.js', 'pgsql': 'pgsql.js', "postgres','postgresql": 'pgsql.js', 'pony': 'pony.js', 'powershell': 'powershell.js', '"ps"': 'powershell.js', '"ps1"': 'powershell.js', 'processing': 'processing.js', 'profile': 'profile.js', 'prolog': 'prolog.js', 'protobuf': 'protobuf.js', 'puppet': 'puppet.js', 'pp': 'puppet.js', 'purebasic': 'purebasic.js', 'pb': 'purebasic.js', 'pbi': 'purebasic.js', 'q': 'q.js', 'k': 'q.js', 'kdb': 'q.js', 'qml': 'qml.js', 'qt': 'qml.js', 'r': 'r.js', 'reasonml': 'reasonml.js', 're': 'reasonml.js', 'rib': 'rib.js', 'roboconf': 'roboconf.js', 'graph': 'roboconf.js', 'instances': 'roboconf.js', 'routeros': 'routeros.js', 'mikrotik': 'routeros.js', 'rsl': 'rsl.js', 'ruleslanguage': 'ruleslanguage.js', 'sas': 'sas.js', 'SAS': 'sas.js', 'scala': 'scala.js', 'scheme': 'scheme.js', 'scilab': 'scilab.js', 'sci': 'scilab.js', 'smali': 'smali.js', 'smalltalk': 'smalltalk.js', 'st': 'smalltalk.js', 'sml': 'sml.js', 'sqf': 'sqf.js', 'stan': 'stan.js', 'stanfuncs': 'stan.js', 'stata': 'stata.js', 'do': 'stata.js', 'ado': 'stata.js', 'step21': 'step21.js', 'p21': 'step21.js', 'step': 'step21.js', 'stp': 'step21.js', 'stylus': 'stylus.js', 'styl': 'stylus.js', 'subunit': 'subunit.js', 'taggerscript': 'taggerscript.js', 'tap': 'tap.js', 'tcl': 'tcl.js', 'tk': 'tcl.js', 'thrift': 'thrift.js', 'tp': 'tp.js', 'twig': 'twig.js', 'craftcms': 'twig.js', 'vala': 'vala.js', 'vbnet': 'vbnet.js', 'vb': 'vbnet.js', 'vbscript-html': 'vbscript-html.js', 'vbscript': 'vbscript.js', 'vbs': 'vbscript.js', 'verilog': 'verilog.js', 'v': 'verilog.js', 'sv': 'verilog.js', 'svh': 'verilog.js', 'vhdl': 'vhdl.js', 'vim': 'vim.js', 'x86asm': 'x86asm.js', 'xl': 'xl.js', 'tao': 'xl.js', 'xquery': 'xquery.js', 'xpath': 'xquery.js', 'xq': 'xquery.js', 'zephir': 'zephir.js', 'zep': 'zephir.js'
             }[brush];
         }
+        // return undefined if not found
         function hl_get_dependency(libname) {
             return {
                 'arduino.js': ['cpp.js'], 'asciidoc.js': ['xml.js'], 'clojure-repl.js': ['clojure.js'], 'dart.js': ['markdown.js'], 'django.js': ['xml.js'], 'dockerfile.js': ['bash.js'], 'dust.js': ['xml.js'], 'erb.js': ['xml.js', 'ruby.js'], 'haml.js': ['ruby.js'], 'handlebars.js': ['xml.js'], 'htmlbars.js': ['xml.js'], 'julia-repl.js': ['julia.js'], 'mojolicious.js': ['xml.js', 'perl.js'], 'parser3.js': ['xml.js'], 'qml.js': ['javascript.js', 'xml.js'], 'tap.js': ['yaml.js'], 'twig.js': ['xml.js'], 'vbscript-html.js': ['xml.js', 'vbscript.js']
