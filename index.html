@@ -13,6 +13,10 @@
         }
         i {
             font-family: 'Times New Roman', serif;
+            font-size: 17px;
+        }
+        code {
+           color: black;
         }
         #Taiwan-map {
             width: 200px;
@@ -22,6 +26,7 @@
         .Work {
             background-color: #edffffff;
             display: flex;
+            margin-bottom: 1em;
         }
         .Work > img {
             width: 160px;
@@ -57,37 +62,57 @@
         <img src="res/identicon.png">
         <div>
             <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h5>
-            <p>An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how Github generates each user's Identicon, it's not too hard to make one. :-)</p>
+            <p>
+                An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how Github generates each user's Identicon, it's not too hard to make one. :-)
+            </p>
         </div>
     </div>
-    <br>
+    <div class="Work">
+        <img src="res/nanorc.png">
+        <div>
+            <h5><a href="https://github.com/davidhcefx/Modern-Nano-Keybindings">Modern Nano Keybindings</a></h5>
+            <p>
+                This is by far <span style="font-size: 10px">(2020)</span> the most comprehensive keybinding file for nano! It has lots of mainstream keystrokes (^C, ^Z, ^Q) as well as vim-like support (^F, ^G). Another plus is that it is still up-to-date with the latest nano :)
+            </p>
+        </div>
+    </div>
     <div class="Work">
         <img src="res/messagebox.png">
         <div>
-            <br>
             <h5><a href="https://github.com/davidhcefx/Windows-MessageBox-for-Cmd">Windows MessageBox for Cmd</a></h5>
-            <p>This is a Cmd tool, which is in fact just a Cpp wrapper, that utilizes the MessageBox WinAPI. It lets people create a pop-up message box with ease.</p>
+            <p>
+                This is a command-line (CLI) tool, which is in fact just a Cpp wrapper that utilizes the MessageBox WinAPI. It brought people the convenience of creating a pop-up dialog from cmd, for example: <code>messagebox "Reminder" "Please turn off the lights" "ok" "info"</code>.
+            </p>
         </div>
     </div>
-    <br>
     <div class="Work">
         <img src="res/trash.png">
         <div>
-            <br>
             <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
-            <p>Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.</p>
+            <p>
+                Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.
+            </p>
         </div>
     </div>
-    <br>
     <div class="Work">
         <img src="res/nano.png">
         <div>
-            <br>
-            <h5><a href="https://github.com/davidhcefx/nano-4.8_modified">nano-4.8 (modified)</a></h5>
-            <p>Now, Ctrl + Backspace can delete a word backwards! (which is already supported in most of the browsers, editors, file explorers, etc. Everywhere!) It's not officially supported on Ubuntu and most Linux platforms.</p>
+            <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_nosearchwrap">GNU nano - nosearchwrap</a></h5>
+            <p>
+                While performing textual search, many editors, for instance Sublime, support toggling the option <b>Wrap</b>, which is to wrap past end-of-file and proceed searching. It will be nice if Nano can have this too!
+            </p>
         </div>
     </div>
-    <br><br>
+    <div class="Work">
+        <img src="res/nano.png">
+        <div>
+            <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_Bsp-enabled">GNU nano - Bsp-enabled</a></h5>
+            <p>
+                <code>Ctrl + Backspace</code> is a modern keybinding that has already been widely supported in most browsers, text editors, search bars, file explorers, etc. However, the <b>nanorc</b> file has very limited adjustabily on keybindings, so it's time for us to compile it ourselves!
+            </p>
+        </div>
+    </div>
+    <br>
 
     <h3>Toys</h3>
     <hr>
