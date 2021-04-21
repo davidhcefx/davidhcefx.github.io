@@ -28,7 +28,7 @@
             display: flex;
             margin-bottom: 1em;
         }
-        .Work > img {
+        .Work img {
             width: 160px;
             border: 2px solid #aaa;
             border-radius: 8px;
@@ -86,15 +86,6 @@
         </div>
     </div>
     <div class="Work">
-        <img src="res/trash.png">
-        <div>
-            <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
-            <p>
-                Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.
-            </p>
-        </div>
-    </div>
-    <div class="Work">
         <img src="res/nano.png">
         <div>
             <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_nosearchwrap">GNU nano - nosearchwrap</a></h5>
@@ -109,6 +100,24 @@
             <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_Bsp-enabled">GNU nano - Bsp-enabled</a></h5>
             <p>
                 <code>Ctrl + Backspace</code> is a modern keybinding that has already been widely supported in most browsers, text editors, search bars, file explorers, etc. However, the <b>nanorc</b> file has very limited adjustabily on keybindings, so it's time for us to compile it ourselves!
+            </p>
+        </div>
+    </div>
+    <div class="Work">
+        <img src="res/findinfiles.png">
+        <div>
+            <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/main/Search%20Keyword%20in%20Files">Search Keyword in Files</a></h5>
+            <p>
+                Searching for cross references within a huge code base can be cumbersome. This is a simple and efficient tool to perform file-content search within a subdirectory.
+            </p>
+        </div>
+    </div>
+    <div class="Work">
+        <img src="res/trash.png">
+        <div>
+            <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
+            <p>
+                Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.
             </p>
         </div>
     </div>
@@ -145,26 +154,32 @@
     </p>
 
     <script>
-        // get value from 'key sep [space] value [space]'
-        function getval(str, sep) {
-            return str.split(sep)[1].trim();
-        }
-        ~function greetings() {
+        (function greetings() {
+            // get value from 'key sep [space] value [space]'
+            function getval(str, sep) {
+                return str.split(sep)[1].trim();
+            }
             fetch('https://www.cloudflare.com/cdn-cgi/trace')
-            .then(async function(res) {
-                const ip = getval(String(await res.text()).split('\n')[2], '=');
+            .then(async r => {
+                const ip = getval(String(await r.text()).split('\n')[2], '=');
                 fetch('https://api.hackertarget.com/geoip/?q=' + ip)
-                .then(async function(res) {
-                    const val = String(await res.text())
+                .then(async r => {
+                    const arr = String(await r.text())
                                 .split('\n')
-                                .map(line => getval(line, ":"));
-                    console.log(
-                        `You visited this site on ${Date()}, using ${ip} from `
-                        + `${val[1]}, ${val[2]}, ${val[3]} (${val[4]}, ${val[5]}).`
-                    );
-                })
-            })
-        }()
+                                .map(line => getval(line, ':'));
+                    const street = `${arr[1]}, ${arr[2]}, ${arr[3]}`;
+                    const coord = `${arr[4]}, ${arr[5]}`;
+                    console.log(`You visited this site on ${Date()}, `
+                                + `using ${ip} from ${street} (${coord}).`);
+                });
+            });
+        })();
+        (function make_img_clickable() {
+            document.querySelectorAll('.Work > img').forEach(i => {
+                const html = `<a href="${i.src}">${i.outerHTML}</a>`;
+                i.outerHTML = html;
+            });
+        })();
         function _click() {
             document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
         }
