@@ -162,20 +162,24 @@
     <script>
         // Greetings!
         (() => {
-            // get value from 'key sep [space] value [space]'
-            function getval(str, sep) {
+            // get value from: KEY SEP (SPACE)* VALUE (SPACE)*
+            function getValue(str, sep) {
                 return str.split(sep)[1].trim();
             }
             fetch('https://www.cloudflare.com/cdn-cgi/trace')
-            .then(async r => {
-                const ip = getval(String(await r.text()).split('\n')[2], '=');
-                fetch('https://api.hackertarget.com/geoip/?q=' + ip)
-                .then(async r => {
-                    const arr = String(await r.text())
-                                .split('\n')
-                                .map(line => getval(line, ':'));
-                    const street = `${arr[1]}, ${arr[2]}, ${arr[3]}`;
-                    const coord = `${arr[4]}, ${arr[5]}`;
+            .then((r) => r.text())
+            .then((t) => {
+                const ip = getValue(t.split('\n')[2], '=');
+                fetch(`https://api.hackertarget.com/geoip/?q=${ip}`)
+                .then((r) => r.text())
+                .then((t) => {
+                    let street = '';
+                    let coord = '';
+                    if (!t.includes('count exceeded')) {
+                        const arr = t.split('\n').map((line) => getValue(line, ':'));
+                        street = `${arr[1]}, ${arr[2]}, ${arr[3]}`;
+                        coord = `${arr[4]}, ${arr[5]}`;
+                    }
                     console.log(`You visited this site on ${Date()}, `
                                 + `using ${ip} from ${street} (${coord}).`);
                 });
