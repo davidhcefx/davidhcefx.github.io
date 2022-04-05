@@ -6,63 +6,10 @@
   <meta name="description" content="Welcome to davidhcefx's website!">
   <link href="res/favicon.ico" rel="icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-  <script src='src/k.js'></script>
-  <script src='src/script.js'></script>
+  <script src="src/k.js"></script>
+  <script src="src/script.js"></script>
   <script>Konami(function(){alert(1)});</script>
-  <style>
-    body {
-      margin: 1% 1% 0 1%;
-    }
-    i {
-      font-family: 'Times New Roman', serif;
-      font-size: 17px;
-    }
-    textarea {
-      /* prevent elements from overflowing */
-      max-width: 100%;
-    }
-    code {
-       color: black;
-    }
-    #social-links {
-      display: inline;
-      float: right;
-    }
-    #social-links a {
-      text-decoration: none;
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-    #taiwan-map {
-      width: 170px;
-      max-width: 50%;
-      border-radius: 8px;
-      float: right;
-    }
-    #highlight-result {
-      width: 50%;
-      height: 350px;
-      float: right;
-    }
-    .Red-link, .Red-link:hover {
-      color: rgb(255,64,129);
-      text-decoration: none;
-    }
-    .Work {
-      background-color: #edffffff;
-      display: flex;
-      margin-bottom: 1em;
-    }
-    .Work img {
-      width: 160px;
-      border: 2px solid #aaa;
-      border-radius: 8px;
-    }
-    .Work > div {
-      align-self: center;
-      margin-left: 30px
-    }
-  </style>
+  <link href="src/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -75,13 +22,13 @@
       <img src="res/Octicons-git-pull-request-180px.svg.png" alt="Pull request icon purple" width="25">
     </a>
     <a href="https://davidhu0903ex3.pixnet.net/blog/category/5470952">
-      <img src="res/320px-Pixnet_logo.svg.png" alt="Pixnet logo" width="60">
+      <img src="res/320px-Pixnet_logo.svg.png" alt="Pixnet logo" id="pixnet-logo" width="60">
     </a>
   </div>
   <hr>
 
   <p style="margin-bottom: 3em">
-    <a class="Red-link" href="https://github.com/davidhcefx"><b>davidhcefx</b></a><i>, A student from Taiwan who loves computer science.</i>
+    <a href="https://github.com/davidhcefx" class="Red-link"><b>davidhcefx</b></a><i>, A student from Taiwan who loves computer science.</i>
     <img src="res/Taiwan_map.jpg" alt="where is Taiwan" id="taiwan-map">
   </p>
 
@@ -108,15 +55,6 @@
     </div>
   </div>
   <div class="Work">
-    <img src="res/messagebox.png" alt="usage of MessageBox">
-    <div>
-      <h5><a href="https://github.com/davidhcefx/Windows-MessageBox-for-Cmd">Windows MessageBox for Cmd</a></h5>
-      <p>
-        This is a command-line (CLI) tool, which is in fact just a Cpp wrapper that utilizes the MessageBox WinAPI. It brought people the convenience of creating a pop-up dialog from cmd, for example: <code>messagebox "Reminder" "Please turn off the lights" "ok" "info"</code>.
-      </p>
-    </div>
-  </div>
-  <div class="Work">
     <img src="res/nano.png" alt="gnu nano logo">
     <div>
       <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_nosearchwrap">GNU nano - nosearchwrap</a></h5>
@@ -128,9 +66,9 @@
   <div class="Work">
     <img src="res/nano.png" alt="gnu nano logo">
     <div>
-      <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_Bsp-enabled">GNU nano - Bsp-enabled</a></h5>
+      <h5><a href="https://github.com/davidhcefx/GNU_nano_6.2_Set-Tabsize-Dynamically">GNU nano - Set Tabsize Dynamically</a></h5>
       <p>
-        <code>Ctrl + Backspace</code> is a modern keybinding that has already been widely supported in most browsers, text editors, search bars, file explorers, etc. However, the <b>nanorc</b> file has very limited adjustabily on keybindings, so it's time for us to compile it ourselves!
+        Some files use two spaces for indentation (eg. HTML), while others use four (eg. Python). In the middle of editing a file, I always wish I could change the <b>tab width</b> without reopening the file (= loss of history). This patch achieves our goal!
       </p>
     </div>
   </div>
@@ -148,18 +86,21 @@
   <h3>Toys</h3>
   <hr>
 
-  <iframe id='highlight-result' srcdoc='' hidden></iframe>
+  <iframe id="hl-result" srcdoc="" hidden></iframe>
   <ul>
     <li>
-      <p><a href="javascript:alert(1);_click()" id='click'>Click me!</a></p>
+      <p><a href="javascript:alert(1);_click()" id="click">Click me!</a></p>
     </li>
+
     <li>
       <textarea id="jscode" rows="3" cols="30" placeholder="I want to run JS now!"></textarea>
       <input type="button" value="Run" onclick="eval(document.querySelector('#jscode').value)">
     </li>
+
     <li>
       <p><a href="LCG.html">Linear Congruential Generator</a></p>
     </li>
+
     <li>
       <p><a href="https://highlightjs.org/">highlight.js</a> Online Testing Tool:</p>
       <div>
@@ -167,11 +108,12 @@
         <textarea id="hl-brush" rows="1" cols="10" placeholder="auto"></textarea>
         <textarea id="hl-style" rows="1" cols="15" placeholder="monokai-sublime"></textarea>
         <input type="button" value="Go" onclick="doHighlight()">
-        <div id='hl-reminder'></div>
+        <div id="hl-reminder"></div>
       </div>
     </li>
   </ul>
   <br><br><br><br><br><br><br><br><br>
+
   <p style="margin-left:2em">
     <img src="https://folding.extremeoverclocking.com/sigs/sigimage.php?un=davidhcefx&t=31403" alt="davidhcefx's folding at home status" style="max-width: 100%;">
   </p>

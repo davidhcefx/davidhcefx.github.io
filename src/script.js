@@ -59,7 +59,7 @@ function doHighlight() {
     <body><pre><code class="${brush}">${escapeTags(code)}</code></pre>
     \x3c/body>\x3c/html>`;
 
-  const result = document.getElementById('highlight-result');
+  const result = document.getElementById('hl-result');
   result.hidden = false;
   result.srcdoc = html;
 }
