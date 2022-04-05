@@ -4,7 +4,7 @@
   <title>Welcome | davidhcefx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Welcome to davidhcefx's website!">
-  <link href="favicon.ico" rel="icon">
+  <link href="res/favicon.ico" rel="icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <script src='src/k.js'></script>
   <script src='src/script.js'></script>
@@ -13,22 +13,40 @@
     body {
       margin: 1% 1% 0 1%;
     }
-    textarea {
-      /* prevent elements from overflowing */
-      max-width: 100%;
-    }
     i {
       font-family: 'Times New Roman', serif;
       font-size: 17px;
     }
+    textarea {
+      /* prevent elements from overflowing */
+      max-width: 100%;
+    }
     code {
        color: black;
     }
-    #Taiwan-map {
-      width: 200px;
-      max-width: 40%;
+    #social-links {
+      display: inline;
+      float: right;
+    }
+    #social-links a {
+      text-decoration: none;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
+    #taiwan-map {
+      width: 170px;
+      max-width: 50%;
       border-radius: 8px;
       float: right;
+    }
+    #highlight-result {
+      width: 50%;
+      height: 350px;
+      float: right;
+    }
+    .Red-link, .Red-link:hover {
+      color: rgb(255,64,129);
+      text-decoration: none;
     }
     .Work {
       background-color: #edffffff;
@@ -44,31 +62,34 @@
       align-self: center;
       margin-left: 30px
     }
-    #highlight-result {
-      width: 50%;
-      height: 350px;
-      float: right;
-    }
   </style>
 </head>
 <body>
 
-  <h3>Who am I?</h3>
+  <h3 style="display: inline">Who am I?</h3>
+  <div id="social-links">
+    <a href="https://github.com/davidhcefx">
+      <img src="res/GitHub-Mark-32px.png" alt="GitHub logo" width="25">
+    </a>
+    <a href="github.html">
+      <img src="res/Octicons-git-pull-request-180px.svg.png" alt="Pull request icon purple" width="25">
+    </a>
+    <a href="https://davidhu0903ex3.pixnet.net/blog/category/5470952">
+      <img src="res/320px-Pixnet_logo.svg.png" alt="Pixnet logo" width="60">
+    </a>
+  </div>
   <hr>
 
-  <p>
-    <a href="https://github.com/davidhcefx"><b>davidhcefx</b> <img src="res/GitHub-Mark-32px.png" alt="Github logo" style="height:20px; margin-bottom:5px"></a><i> , A student from Taiwan who loves computer science.</i>
-    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" id="Taiwan-map">
+  <p style="margin-bottom: 3em">
+    <a class="Red-link" href="https://github.com/davidhcefx"><b>davidhcefx</b></a><i>, A student from Taiwan who loves computer science.</i>
+    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" id="taiwan-map">
   </p>
-  <p>
-    <a href="github.html" class="btn btn-outline-warning">My GitHub Activities</a>
-  </p>
-  <br>
 
   <h3>Works</h3>
   <hr>
 
   <div class="Work">
+    <!-- Ideally be easy to understand and impressive...  -->
     <img src="res/identicon.png" alt="davidhcefx/identicon">
     <div>
       <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h5>
