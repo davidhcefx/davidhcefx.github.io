@@ -6,20 +6,20 @@
   <meta name="description" content="Welcome to davidhcefx's website!">
   <link href="res/favicon.ico" rel="icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="src/style.css" rel="stylesheet">
   <script src="src/k.js"></script>
   <script src="src/script.js"></script>
-  <script>Konami(function(){alert(1)});</script>
-  <link href="src/style.css" rel="stylesheet">
+  <script>Konami(() => {h = document.lastChild; d = 'dark'; h.hasAttribute(d) ? h.removeAttribute(d) : h.setAttribute(d, 1)});</script>
 </head>
 <body>
 
   <h3 style="display: inline">Who am I?</h3>
   <div id="social-links">
     <a href="https://github.com/davidhcefx">
-      <img src="res/GitHub-Mark-32px.png" alt="GitHub logo" width="25">
+      <img src="res/GitHub-Mark-32px.png" alt="github-logo" class="Dark-inv" width="25">
     </a>
     <a href="github.html">
-      <img src="res/Octicons-git-pull-request-180px.svg.png" alt="Pull request icon purple" width="25">
+      <img src="res/git-pull-request-180px.png" alt="pull request purple" class="Dark-inv" width="25">
     </a>
     <a href="https://davidhu0903ex3.pixnet.net/blog/category/5470952">
       <img src="res/320px-Pixnet_logo.svg.png" alt="Pixnet logo" id="pixnet-logo" width="60">
@@ -29,7 +29,7 @@
 
   <p style="margin-bottom: 3em">
     <a href="https://github.com/davidhcefx" class="Red-link"><b>davidhcefx</b></a><i>, A student from Taiwan who loves computer science.</i>
-    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" id="taiwan-map">
+    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" class="Dark-dim" id="taiwan-map">
   </p>
 
   <h3>Works</h3>
@@ -37,7 +37,7 @@
 
   <div class="Work">
     <!-- Ideally be easy to understand and impressive...  -->
-    <img src="res/identicon.png" alt="davidhcefx/identicon">
+    <img src="res/identicon.png" alt="davidhcefx/identicon" class="Dark-inv">
     <div>
       <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h5>
       <p>
@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="Work">
-    <img src="res/nano.png" alt="gnu nano logo">
+    <img src="res/nano.png" alt="gnu nano logo" class="Dark-dim">
     <div>
       <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_nosearchwrap">GNU nano - nosearchwrap</a></h5>
       <p>
@@ -64,7 +64,7 @@
     </div>
   </div>
   <div class="Work">
-    <img src="res/nano.png" alt="gnu nano logo">
+    <img src="res/nano.png" alt="gnu nano logo" class="Dark-dim">
     <div>
       <h5><a href="https://github.com/davidhcefx/GNU_nano_6.2_Set-Tabsize-Dynamically">GNU nano - Set Tabsize Dynamically</a></h5>
       <p>
@@ -73,7 +73,7 @@
     </div>
   </div>
   <div class="Work">
-    <img src="res/trash.png" alt="davidhcefx/Trash">
+    <img src="res/trash.png" alt="davidhcefx/Trash" class="Dark-inv">
     <div>
       <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
       <p>
@@ -94,7 +94,7 @@
 
     <li>
       <textarea id="jscode" rows="3" cols="30" placeholder="I want to run JS now!"></textarea>
-      <input type="button" value="Run" onclick="eval(document.querySelector('#jscode').value)">
+      <input type="button" class="Dark-inv" value="Run" onclick="eval(document.querySelector('#jscode').value)">
     </li>
 
     <li>
@@ -107,7 +107,7 @@
         <textarea id="hl-code" rows="8" cols="50" placeholder="Code to be highlighted"></textarea>
         <textarea id="hl-brush" rows="1" cols="10" placeholder="auto"></textarea>
         <textarea id="hl-style" rows="1" cols="15" placeholder="monokai-sublime"></textarea>
-        <input type="button" value="Go" onclick="doHighlight()">
+        <input type="button" class="Dark-inv" value="Go" onclick="doHighlight()">
         <div id="hl-reminder"></div>
       </div>
     </li>
@@ -115,7 +115,7 @@
   <br><br><br><br><br><br><br><br><br>
 
   <p style="margin-left:2em">
-    <img src="https://folding.extremeoverclocking.com/sigs/sigimage.php?un=davidhcefx&t=31403" alt="davidhcefx's folding at home status" style="max-width: 100%;">
+    <img src="https://folding.extremeoverclocking.com/sigs/sigimage.php?un=davidhcefx&t=31403" alt="davidhcefx's folding at home status" class="Dark-inv" style="max-width: 100%">
   </p>
 
   <script>
