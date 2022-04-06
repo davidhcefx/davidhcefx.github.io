@@ -9,7 +9,6 @@
   <link href="src/style.css" rel="stylesheet">
   <script src="src/k.js"></script>
   <script src="src/script.js"></script>
-  <script>Konami(() => {h = document.lastChild; s = 'switch'; h.hasAttribute(s) ? h.removeAttribute(s) : h.setAttribute(s, 1)});</script>
 </head>
 <body>
 
@@ -88,21 +87,21 @@
 
   <iframe id="hl-result" srcdoc="" hidden></iframe>
   <ul>
+    <!--<li>
+      <p><a href="#click" id="click" onclick="alert(1); document.getElementById('click').outerHTML = 'Practice XSS at <a href=\'https://prompt.ml/0\' id=\'click\'>Prompt(1) to win</a> :)'">Click me!</a></p>
+    </li>-->
     <li>
-      <p><a href="javascript:alert(1);_click()" id="click">Click me!</a></p>
+      <div id="ip-info"><code><a href="src/script.js" class="Inherit-link"></a></code></div>
     </li>
-
     <li>
       <textarea id="jscode" rows="3" cols="30" placeholder="I want to run JS now!"></textarea>
       <input type="button" class="Dark-inv" value="Run" onclick="eval(document.querySelector('#jscode').value)">
     </li>
-
     <li>
       <p><a href="LCG.html">Linear Congruential Generator</a></p>
     </li>
-
     <li>
-      <p><a href="https://highlightjs.org/">highlight.js</a> Online Testing Tool:</p>
+      <p><a href="https://highlightjs.org/">highlight.js Online Testing Tool</a>:</p>
       <div>
         <textarea id="hl-code" rows="8" cols="50" placeholder="Code to be highlighted"></textarea>
         <textarea id="hl-brush" rows="1" cols="10" placeholder="auto"></textarea>
@@ -119,42 +118,20 @@
   </p>
 
   <script>
-    // Greetings!
-    (() => {
-      // get value from: KEY SEP (SPACE)* VALUE (SPACE)*
-      function getValue(str, sep) {
-        return str.split(sep)[1].trim();
-      }
-      fetch('https://www.cloudflare.com/cdn-cgi/trace')
-      .then((r) => r.text())
-      .then((t) => {
-        const ip = getValue(t.split('\n')[2], '=');
-        fetch(`https://api.hackertarget.com/geoip/?q=${ip}`)
-        .then((r) => r.text())
-        .then((t) => {
-          let street = '';
-          let coord = '';
-          if (!t.includes('count exceeded')) {
-            const arr = t.split('\n').map((line) => getValue(line, ':'));
-            street = `${arr[1]}, ${arr[2]}, ${arr[3]}`;
-            coord = `${arr[4]}, ${arr[5]}`;
-          }
-          console.log(`You visited this site on ${Date()}, `
-                + `using ${ip} from ${street} (${coord}).`);
-        });
-      });
-    })();
+    fetchIP();
     // Add links to make images clickable
     (() => {
-      document.querySelectorAll('.Work > img').forEach(i => {
-        const html = `<a href="${i.src}">${i.outerHTML}</a>`;
-        i.outerHTML = html;
+      document.querySelectorAll('.Work > img').forEach((img) => {
+        const html = `<a href="${img.src}">${img.outerHTML}</a>`;
+        img.outerHTML = html;
       });
     })();
-    // Callback for click me
-    function _click() {
-      document.getElementById('click').outerHTML="Practice XSS at <a href='https://prompt.ml/0'>Prompt(1) to win</a> :)"
-    }
+    // Konami code
+    Konami(() => {
+      const h = document.lastChild;
+      const s = 'switch';
+      h.hasAttribute(s) ? h.removeAttribute(s) : h.setAttribute(s, 1);
+    });
   </script>
 </body>
 </html>
