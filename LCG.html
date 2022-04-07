@@ -13,30 +13,48 @@
     }
     code {
       /*font-weight: bold;*/
+      color: #d63384;
+    }
+    .Go-btn {
+      float: right;
+      width: 44px;
     }
     .Highlight {
-      background-color: #fffbe5;
+      background-color: cornsilk;
+      color: black;
     }
-    .Inline-box {
-      border: none;
-      background-color: aliceblue;
-      text-align: center;
-      font-size: 16px;
-      font-family: monospace;
+    .Output-samples {
+      margin-top: 0;
+      margin-left: 1em;
+    }
+    .Ans-prompt {
+      margin-left: 1em;
+      color: black;
     }
     #playground {
       float: right;
       border-style: ridge;
       width: 40%;
       max-width: 370px;
-      padding: 0 2% 2% 2%;
+      padding: 0 2% 1% 2%;
     }
-    #compute-btn {
-      float: right;
-      width: 44px;
+    #playground p input[type=text] {
+      background-color: aliceblue;
+      border: none;
+      width: 65px;
+    }
+    #playground code {
+      color: black;
+    }
+    #Si {
+      text-align: center;
+      font-size: 16px;
+      font-family: monospace;
     }
     #result {
       width: 100%;
+      resize: none;
+      /*max-width: 100%;*/
     }
   </style>
 </head>
@@ -63,53 +81,60 @@ function f(Si) {
   <div id="playground">
     <h3>Playground</h3>
     <p>
-      Compute
-      <code>
-        (<input type="text" id="a" value="2" class="Inline-box" style="width: 8.9px" onkeyup="autoscale(this)">
-        *
-        <input type="text" id="Si" value="1" class="Inline-box" style="width: 8.9px" onkeyup="autoscale(this)">
-        +
-        <input type="text" id="b" value="7" class="Inline-box" style="width: 8.9px" onkeyup="autoscale(this)">)
-        mod
-        <input type="text" id="N" value="23" class="Inline-box" style="width: 17.8px" onkeyup="autoscale(this)">:
-      </code>
-      <input type="button" id="compute-btn" value="Go" onclick="compute()">
+      a = <input type="text" value="2" onblur="$('#a')[0].innerText = this.value">,
+      b = <input type="text" value="7" onblur="$('#b')[0].innerText = this.value">,
+      N = <input type="text" value="23" onblur="$('#N')[0].innerText = this.value">
     </p>
-    <textarea id="result" rows="8"></textarea>
+    <p>
+      Calculate
+      <code>
+        (<span id="a">2</span>
+        *
+        <input type="text" id="Si" value="1" style="width: 8.9px" onkeyup="autoscale(this)">
+        +
+        <span id="b">7</span>)
+        mod
+        <span id="N">23</span>:
+      </code>
+      <input type="button" class="Go-btn" value="Go" onclick="calculate()">
+    </p>
+    <textarea id="result" rows="7" disabled></textarea><br>
   </div>
 
-  <p>1. We already leaked two of them, <code class="Highlight">&nbsp;a = 12349876 </code> and <code class="Highlight">&nbsp;N = 43216789 </code>, please help us figure out <code>b</code> :</p>
-  <p>These are the outputs we gathered:<br>
-  <code>
-    &emsp; Si&nbsp;&nbsp; = 34425850<br>
-    &emsp; Si+1 = 19828421<br>
-    &emsp; Si+2 = 40149722
-  </code></p>
-  <p>Once we figured out <code>b</code>, ALL the consecutive numbers generated would no no longer be "random" anymore!<br>
-  If you think you've cracked it, please provide the next random number.</p>
-  <code>&emsp; Si+3 = <input type="text" size="9" id="ans_1"></code> <input type="button" value="Check" onclick="check_1()">&emsp;<span id="check_res_1"></span>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <hr>
+  <p>
+    1. We already leaked two of them,<code class="Highlight">&nbsp;a = 12349876&nbsp;</code>and<code class="Highlight">&nbsp;N = 43216789&nbsp;</code>, please help us figure out <code>b</code>!
+  </p>
+  Here are some outputs we've gathered:
+  <pre class="Output-samples">
+Si   = 34425850
+Si+1 = 19828421
+Si+2 = 40149722</pre>
+  <p>
+    Once we figured out <code>b</code>, ALL the consecutive numbers generated would no longer be <i>random</i> anymore (aka cracked)!<br>
+    If you think you've cracked it, please provide the next random number:
+  </p>
+  <code class="Ans-prompt">Si+3 = </code>
+  <input type="text" id="ans_1" size="9">
+  <input type="button" value="Check" onclick="check_1()">
+  <span id="check_res_1"></span>
+  <hr style="margin-top: 5em;">
 
-  <p>2. This time, we only leaked <code class="Highlight">&nbsp;N = 87879487 </code>, but I think it is still crackable!</p>
-  <p>Again, we have gathered some outputs:<br>
-  <code>
-    &emsp; Si&nbsp;&nbsp; = 30296335<br>
-    &emsp; Si+1 = 60248031<br>
-    &emsp; Si+2 = 23522917
-  </code></p>
-  <p>If you think you've cracked it, please provide the next random number:</p>
-  <code>&emsp; Si+3 = <input type="text" size="9" id="ans_2"></code> <input type="button" value="Check" onclick="check_2()">&emsp;<span id="check_res_2"></span>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <hr>
+  <p>
+    2. This time, we only leaked<code class="Highlight">&nbsp;N = 87879487&nbsp;</code>, but I somehow feel that it's still crackable...
+  </p>
+  Again, we have gathered some outputs:
+  <pre class="Output-samples">
+Si   = 30296335
+Si+1 = 60248031
+Si+2 = 23522917</pre>
+  <p>
+    If you think you've cracked it, please provide the next random number:
+  </p>
+  <code class="Ans-prompt">Si+3 = </code>
+  <input type="text" id="ans_2" size="9">
+  <input type="button" value="Check" onclick="check_2()">
+  <span id="check_res_2"></span>
+  <hr style="margin-top: 5em;">
   
   <!--  solvable ?
   67702636
@@ -126,21 +151,26 @@ function f(Si) {
   <br>
 
   <script>
+    let results = [];  // results for playground
+
     function autoscale(element) {
       // each digits uses up ~ 8.9px
       element.style.width = `${element.value.length * 8.9}px`;
     }
 
-    function compute() {
-      const a = parseInt($('#a')[0].value);
-      const b = parseInt($('#b')[0].value);
-      const N = parseInt($('#N')[0].value);
-      const Si_elem = $('#Si')[0];
-      const res = (a * parseInt(Si_elem.value) + b) % N;
-      $('#result')[0].value += `${res}\n`;
-      // set result to next Si
-      Si_elem.value = res;
-      autoscale(Si_elem);
+    function calculate() {
+      const a = parseInt($('#a')[0].innerText);
+      const b = parseInt($('#b')[0].innerText);
+      const N = parseInt($('#N')[0].innerText);
+      const Si = $('#Si')[0];
+      const res = (a * parseInt(Si.value) + b) % N;
+
+      if (results.length >= $('#result')[0].rows) results.shift();
+      results.push(res);
+      $('#result')[0].value = results.join('\n');
+      // also set to next Si
+      Si.value = res;
+      autoscale(Si);
     }
 
     /* xor two hex strings */
