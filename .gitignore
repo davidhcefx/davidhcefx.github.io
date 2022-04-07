@@ -1,8 +1,5 @@
-# flags
-.secrete.flags
-
-# notes
-.notes
+# secrete files
+.secrete.*
 
 ################ node
 # Logs

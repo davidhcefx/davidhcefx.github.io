@@ -3,53 +3,82 @@
 <head>
   <title>Crypto: Linear Congruential Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cracking Linear Congruential Generator">
-  <link href="favicon.ico" rel="icon">
+  <meta name="description" content="Cracking Linear Congruential Generator (CTF Wargame)">
+  <link href="res/favicon.ico" rel="icon">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src='src/md5.js'></script>
   <style>
-    code {
+    code, pre {
       font-size: 16px;
     }
-    .HL {
+    code {
+      /*font-weight: bold;*/
+    }
+    .Highlight {
       background-color: #fffbe5;
     }
-    .Playground {
-      border-style: ridge;
+    .Inline-box {
+      border: none;
+      background-color: aliceblue;
+      text-align: center;
+      font-size: 16px;
+      font-family: monospace;
+    }
+    #playground {
       float: right;
-      width: 26%;
-      padding-left: 2%;
-      padding-right: 2%;
+      border-style: ridge;
+      width: 40%;
+      max-width: 370px;
+      padding: 0 2% 2% 2%;
+    }
+    #compute-btn {
+      float: right;
+      width: 44px;
+    }
+    #result {
+      width: 100%;
     }
   </style>
 </head>
 <body>
+
   <h1>Linear Congruential Generator</h1>
   <hr>
+
   <p>The formula is as follows:</p>
-  <pre style="font-size: 16px;">
+  <pre>
 function f(Si) {
   return (a * Si + b) mod N
 }</pre>
 
-  <p>Basically, <code>a</code>, <code>b</code>, and <code>N</code> are the coefficients of the random number generator.<br>
-  In round 1, <code>S1</code> will be plugged in, and the output will become <code>S2</code>, which is the input of round 2. By gathering all the outputs, we will have a sequence of random numbers.</p>
-  <p>The question is, can we crack this Random Number Generator (RNG)? That is, can we find out the coefficients <code>a</code>, <code>b</code>, and <code>N</code> by simply observing the generated outputs? Let's try it out:
+  <p>
+    Basically, <code>a</code>, <code>b</code>, and <code>N</code> are the coefficients of the Random Number Generator (RNG).<br>
+    In round 1, <code>S1</code> will be plugged in, producing output <code>S2</code>, which will then be the input of round 2. By gathering all the outputs, we will have a sequence of random numbers.
+  </p>
+  <p>
+    The question is, can we crack this RNG? That is, can we find out the coefficients <code>a</code>, <code>b</code>, and <code>N</code> by simply observing the generated outputs? Let's check it out:
   </p>
   <hr>
 
-  <div Class="Playground">
-  <h3> Playground </h3>
-  <p>
-    a = <input type="text" size="7" value=2 onblur="set('a', this.value)">,
-    b = <input type="text" size="7" value=7 onblur="set('b', this.value)">,
-    N = <input type="text" size="7" value=23 onblur="set('N', this.value)">
-    &emsp;<input type="button" value="Go" onclick="compute()" style="width: 44px;">
-  </p>
-  <p> Compute <code>(<span id="a">2</span> * <input type="text" size="5" id="S" value=1 style="text-align: center;"> + <span id="b">7</span>) mod <span id="N">23</span></code> :</p>
-  <p><textarea id="result" rows="6" style="width: 100%"></textarea></p>
+  <div id="playground">
+    <h3>Playground</h3>
+    <p>
+      Compute
+      <code>
+        (<input type="text" id="a" value="2" class="Inline-box" style="width: 8.9px" onkeyup="autoscale(this)">
+        *
+        <input type="text" id="Si" value="1" class="Inline-box" style="width: 8.9px" onkeyup="autoscale(this)">
+        +
+        <input type="text" id="b" value="7" class="Inline-box" style="width: 8.9px" onkeyup="autoscale(this)">)
+        mod
+        <input type="text" id="N" value="23" class="Inline-box" style="width: 17.8px" onkeyup="autoscale(this)">:
+      </code>
+      <input type="button" id="compute-btn" value="Go" onclick="compute()">
+    </p>
+    <textarea id="result" rows="8"></textarea>
   </div>
 
-  <p>1. We already leaked two of them, <code class="HL">&nbsp;a = 12349876 </code> and <code class="HL">&nbsp;N = 43216789 </code>, please help us figure out <code>b</code> :</p>
+  <p>1. We already leaked two of them, <code class="Highlight">&nbsp;a = 12349876 </code> and <code class="Highlight">&nbsp;N = 43216789 </code>, please help us figure out <code>b</code> :</p>
   <p>These are the outputs we gathered:<br>
   <code>
     &emsp; Si&nbsp;&nbsp; = 34425850<br>
@@ -65,7 +94,8 @@ function f(Si) {
   <br>
   <br>
   <hr>
-  <p>2. This time, we only leaked <code class="HL">&nbsp;N = 87879487 </code>, but I think it is still crackable!</p>
+
+  <p>2. This time, we only leaked <code class="Highlight">&nbsp;N = 87879487 </code>, but I think it is still crackable!</p>
   <p>Again, we have gathered some outputs:<br>
   <code>
     &emsp; Si&nbsp;&nbsp; = 30296335<br>
@@ -80,6 +110,7 @@ function f(Si) {
   <br>
   <br>
   <hr>
+  
   <!--  solvable ?
   67702636
   36138443
@@ -88,10 +119,18 @@ function f(Si) {
   80610932
   12711352
   91694468 -->
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
   <script>
-    function set(id, value) {
-      document.getElementById(id).innerText = value;
+    function autoscale(element) {
+      // each digits uses up ~ 8.9px
+      element.style.width = `${element.value.length * 8.9}px`;
     }
+
     function compute() {
       a = parseInt(document.getElementById('a').innerText);
       b = parseInt(document.getElementById('b').innerText);
