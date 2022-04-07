@@ -87,7 +87,7 @@ function f(Si) {
   </code></p>
   <p>Once we figured out <code>b</code>, ALL the consecutive numbers generated would no no longer be "random" anymore!<br>
   If you think you've cracked it, please provide the next random number.</p>
-  <code>&emsp; Si+3 = <input type="text" size="9" id="ans1"></code> <input type="button" value="Check" onclick="check1()">&emsp;<span id="check_res_1"></span>
+  <code>&emsp; Si+3 = <input type="text" size="9" id="ans_1"></code> <input type="button" value="Check" onclick="check_1()">&emsp;<span id="check_res_1"></span>
   <br>
   <br>
   <br>
@@ -103,7 +103,7 @@ function f(Si) {
     &emsp; Si+2 = 23522917
   </code></p>
   <p>If you think you've cracked it, please provide the next random number:</p>
-  <code>&emsp; Si+3 = <input type="text" size="9" id="ans2"></code> <input type="button" value="Check" onclick="check2()">&emsp;<span id="check_res_2"></span>
+  <code>&emsp; Si+3 = <input type="text" size="9" id="ans_2"></code> <input type="button" value="Check" onclick="check_2()">&emsp;<span id="check_res_2"></span>
   <br>
   <br>
   <br>
@@ -132,66 +132,88 @@ function f(Si) {
     }
 
     function compute() {
-      a = parseInt(document.getElementById('a').innerText);
-      b = parseInt(document.getElementById('b').innerText);
-      N = parseInt(document.getElementById('N').innerText);
-      S_block = document.getElementById('S');
-      res = (a * parseInt(S_block.value) + b) % N;
-      document.getElementById('result').value += res + "\n";
-      S_block.value = res;
+      const a = parseInt($('#a')[0].value);
+      const b = parseInt($('#b')[0].value);
+      const N = parseInt($('#N')[0].value);
+      const Si_elem = $('#Si')[0];
+      const res = (a * parseInt(Si_elem.value) + b) % N;
+      $('#result')[0].value += `${res}\n`;
+      // set result to next Si
+      Si_elem.value = res;
+      autoscale(Si_elem);
     }
-    function xor(h1, h2) {
-      // xor two hex strings
-      ret = "";
-      for (i = 0; i < h1.length; i += 4) {  // parse each 2-byte
-        x = parseInt(h1.substr(i, 4), 16) ^ parseInt(h2.substr(i, 4), 16);
-        ret += ("0000" + x.toString(16)).slice(-4);
+
+    /* xor two hex strings */
+    function xor(hex1, hex2) {
+      let res = "";
+      for (let i = 0; i < hex1.length; i += 4) {  // parse each 2 bytes
+        const a = parseInt(hex1.substring(i, i + 4), 16);
+        const b = parseInt(hex2.substring(i, i + 4), 16);
+        res += (a ^ b).toString(16).padStart(4, '0');
       }
-      return ret;
+      return res;
     }
+
+    /* convert ascii to hex string */
     function stoh(str) {
-      ret = "";
-      for (i in str) {
-        ret += str[i].charCodeAt().toString(16);
-      }
-      return ret;
+      let res = "";
+      str.split('').forEach(s => {
+        res += s.charCodeAt().toString(16);
+      })
+      return res;
     }
+
+    /* convert hex string to ascii */
     function htos(hex) {
-      ret = "";
-      for (i = 0; i < hex.length; i += 2) {
-        ret += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
-      }
-      return ret;
+      let res = "";
+      let octate_buf = [];  // collect two octates to form one byte
+      hex.split('').forEach(h => {
+        if (octate_buf.length == 0) {
+          octate_buf.push(h);
+        } else {
+          res += String.fromCharCode(parseInt(octate_buf.pop() + h, 16));
+        }
+      });
+      return res;
     }
-    function check1() {
-      m = md5(document.getElementById('ans1').value + "527b59b958f5359a2d38414d");
-      if (m === "ce4964edab6dc88198e913c9b1eb29bc") {
-        h = md5(document.getElementById('ans1').value + "2384ebc68c1f014064cc3442");
-        x = xor(h + h, "43070a0beb30086682b241e783c7ab8370262621f2365354d8b702e680aa9c8b");
-        document.getElementById('check_res_1').innerText = htos(x);
-      } else {
-        document.getElementById('check_res_1').innerText = "Uh...Nope!";
-      }
+
+    function check_1() {
+      const ans = md5(`${$('#ans_1')[0].value}527b59b958f5359a2d38414d`);
+      const key = md5(`${$('#ans_1')[0].value}2384ebc68c1f014064cc3442`);
+      const msg = (ans === "ce4964edab6dc88198e913c9b1eb29bc") ?
+        htos(
+          xor(
+            "43070a0beb30086682b241e783c7ab8370262621f2365354d8b702e680aa9c8b",
+            key + key)) :
+        "Uh...Nope!";
+
+      $('#check_res_1')[0].innerText = msg;
     }
-    function check2() {
-      m = md5(document.getElementById('ans2').value + "7b3d3bdcc16607bfc4011dbd");
-      if (m === "34e618f23bfb66ac310307497237af53") {
-        h = md5(document.getElementById('ans2').value + "a85b21a2620e31d0f938b120");
-        x = xor(h + h, "ab46259a7a6a1807bfa750d86715c966de3916e864402a5c85e216b769449e28");
-        document.getElementById('check_res_2').innerText = htos(x);
-      } else {
-        document.getElementById('check_res_2').innerText = "Not this one!";
-      }
+
+    function check_2() {
+      const ans = md5(`${$('#ans_2')[0].value}7b3d3bdcc16607bfc4011dbd`);
+      const key = md5(`${$('#ans_2')[0].value}a85b21a2620e31d0f938b120`);
+      const msg = (ans === "34e618f23bfb66ac310307497237af53") ?
+        htos(
+          xor(
+            "ab46259a7a6a1807bfa750d86715c966de3916e864402a5c85e216b769449e28",
+            key + key)) :
+        "Not this one!";
+
+      $('#check_res_2')[0].innerText = msg;
     }
-    function check3() {
-      m = md5(document.getElementById('ans3').value + "9738c93165519764628bb872");
-      if (m === "ee01a553f0fadefc819002ce40245b6e") {
-        h = md5(document.getElementById('ans3').value + "7fc618db0df41c2ebd27d430");
-        x = xor(h + h, "7b915d5decf4c0f7607a63cc44c6e44c0cea7445d8c8a69d136650ce43978846");
-        document.getElementById('check_res_3').innerText = htos(x);
-      } else {
-        document.getElementById('check_res_3').innerText = "Try again!";
-      }
+
+    function check_3() {
+      const ans = md5(`${$('#ans_3')[0].value}9738c93165519764628bb872`);
+      const key = md5(`${$('#ans_3')[0].value}7fc618db0df41c2ebd27d430`);
+      const msg = (ans === "ee01a553f0fadefc819002ce40245b6e") ?
+        htos(
+          xor(
+            "7b915d5decf4c0f7607a63cc44c6e44c0cea7445d8c8a69d136650ce43978846",
+            key + key)) :
+        "Try again!";
+
+      $('#check_res_3')[0].innerText = msg;
     }
   </script>
 </body>
