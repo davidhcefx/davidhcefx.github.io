@@ -3,7 +3,7 @@
 <head>
   <title>Crypto: Linear Congruential Generator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cracking Linear Congruential Generator (CTF Wargame)">
+  <meta name="description" content="Cracking Linear Congruential Generator (CTF Wargame by davidhcefx)">
   <link href="res/favicon.ico" rel="icon">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src='src/md5.js'></script>
@@ -12,7 +12,6 @@
       font-size: 16px;
     }
     code {
-      /*font-weight: bold;*/
       color: #d63384;
     }
     .Go-btn {
@@ -31,22 +30,27 @@
       margin-left: 1em;
       color: black;
     }
+    .White, .White * {
+      color: white;
+    }
     #playground {
       float: right;
       border-style: ridge;
       width: 40%;
-      max-width: 370px;
+      max-width: 390px;
       padding: 0 2% 1% 2%;
-    }
-    #playground p input[type=text] {
-      background-color: aliceblue;
-      border: none;
-      width: 65px;
     }
     #playground code {
       color: black;
     }
+    #playground input[onblur] {
+      background-color: aliceblue;
+      border: none;
+      width: 65px;
+    }
     #Si {
+      background-color: aliceblue;
+      border: none;
       text-align: center;
       font-size: 16px;
       font-family: monospace;
@@ -55,6 +59,9 @@
       width: 100%;
       resize: none;
       /*max-width: 100%;*/
+    }
+    #ans_1, #ans_2, #ans_3 {
+      margin-bottom: 6em;
     }
   </style>
 </head>
@@ -96,9 +103,14 @@ function f(Si) {
         mod
         <span id="N">23</span>:
       </code>
-      <input type="button" class="Go-btn" value="Go" onclick="calculate()">
+      <input type="button" class="Go-btn" value="Go" onclick="append_result(calculate())">
     </p>
-    <textarea id="result" rows="7" disabled></textarea><br>
+    <textarea id="result" rows="10" disabled></textarea>
+    <p>
+      Or calculate anything:
+      <input type="text" id="any-input" size="20" placeholder="gcd(16, 12)">
+      <input type="button" class="Go-btn" value="Eval" onclick="append_result(eval($('#any-input')[0].value))">
+    </p>
   </div>
 
   <p>
@@ -117,7 +129,7 @@ Si+2 = 40149722</pre>
   <input type="text" id="ans_1" size="9">
   <input type="button" value="Check" onclick="check_1()">
   <span id="check_res_1"></span>
-  <hr style="margin-top: 5em;">
+  <hr>
 
   <p>
     2. This time, we only leaked<code class="Highlight">&nbsp;N = 87879487&nbsp;</code>, but I somehow feel that it's still crackable...
@@ -134,24 +146,36 @@ Si+2 = 23522917</pre>
   <input type="text" id="ans_2" size="9">
   <input type="button" value="Check" onclick="check_2()">
   <span id="check_res_2"></span>
-  <hr style="margin-top: 5em;">
+  <hr>
   
-  <!--  solvable ?
-  67702636
-  36138443
-  62326253
-  68578233
-  80610932
-  12711352
-  91694468 -->
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <p>
+    3. This time we had no luck and leaked none of them. To compensate that, we've gathered more outputs, which might help in cracking it :-)
+  </p>
+  Anyway, here are the outputs we've gathered:
+  <pre class="Output-samples">
+Si   = 67405306
+Si+1 = 38737998
+Si+2 = 21870365
+Si+3 = 72754763
+Si+4 = 32045724
+Si+5 = 48184566
+Si+6 = 54253663</pre>
+  <p>
+    If you think you've cracked it, please provide the next random number:
+  </p>
+  <code class="Ans-prompt">Si+7 = </code>
+  <input type="text" id="ans_3" size="9">
+  <input type="button" value="Check" onclick="check_3()">
+  <span id="check_res_3"></span>
+  <p style="color: lavender">
+    Hint: Crack N first by
+    <span class="White">
+      using the fact that the probability of k randomly chosen integers being coprime is <a href="https://en.wikipedia.org/wiki/Greatest_common_divisor#Probabilities_and_expected_value">1/zeta(k)</a>.
+    </span>
+  </p>
 
   <script>
-    let results = [];  // results for playground
+    let result_arr = [];  // array for #result
 
     function autoscale(element) {
       // each digits uses up ~ 8.9px
@@ -164,13 +188,26 @@ Si+2 = 23522917</pre>
       const N = parseInt($('#N')[0].innerText);
       const Si = $('#Si')[0];
       const res = (a * parseInt(Si.value) + b) % N;
-
-      if (results.length >= $('#result')[0].rows) results.shift();
-      results.push(res);
-      $('#result')[0].value = results.join('\n');
-      // also set to next Si
+      // set result to next Si
       Si.value = res;
       autoscale(Si);
+
+      return res;
+    }
+
+    /* append to #result and shift older ones */
+    function append_result(value) {
+      result_arr.push(value);
+      if (result_arr.length > $('#result')[0].rows) {
+        result_arr.shift();
+      }
+      $('#result')[0].value = result_arr.join('\n');
+    }
+
+    /* just a simple utility that might be helpful */
+    function gcd(a, b) {
+      if (b == 0) return a;
+      return gcd(b, a % b);
     }
 
     /* xor two hex strings */
@@ -236,10 +273,10 @@ Si+2 = 23522917</pre>
     function check_3() {
       const ans = md5(`${$('#ans_3')[0].value}9738c93165519764628bb872`);
       const key = md5(`${$('#ans_3')[0].value}7fc618db0df41c2ebd27d430`);
-      const msg = (ans === "ee01a553f0fadefc819002ce40245b6e") ?
+      const msg = (ans === "d4ecb6522df250a59f04675a2568d2f0") ?
         htos(
           xor(
-            "7b915d5decf4c0f7607a63cc44c6e44c0cea7445d8c8a69d136650ce43978846",
+            "dcfa60c5cd21a81052cd3667fa756f9aab8149ddf872a54822955a1fad281190",
             key + key)) :
         "Try again!";
 
