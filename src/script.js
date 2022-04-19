@@ -4,15 +4,22 @@ const CDN = `https://cdnjs.cloudflare.com/ajax/libs/highlight.js/${CDN_VER}`;
 
 /* Fetch IP and display in #ip-info */
 function fetchIP() {
-  let key = '91a7e87fdf854ba5999ad65bd2c7ca0d';
+  let [time, info] = JSON.parse(localStorage.getItem('ip_info') || '[0, ""]');
+  if (time + 30000 >= Date.now()) {  // 30-second cache
+    document.querySelector('#ip-info a').innerText = info;
+    return;
+  }
+  const key = '91a7e87fdf854ba5999ad65bd2c7ca0d';
   fetch(`https://api.bigdatacloud.net/data/ip-geolocation?key=${key}`)
-  .then((r) => r.json())
-  .then((j) => {
-    document.querySelector('#ip-info a').innerText = `You visited this site `
-      + `using ${j.ip} (${j.network.carriers[0].name}), from location near `
-      + `${j.location.localityName}, ${j.location.city} City, ${j.country.name} `
-      + `(${j.location.latitude}, ${j.location.longitude}).`;
-  });
+    .then((r) => r.json())
+    .then((j) => {
+      info = 'You visited this site using '
+        + `${j.ip} (${j.network.carriers[0].name}), from location near `
+        + `${j.location.localityName}, ${j.location.city} City, ${j.country.name} `
+        + `(${j.location.latitude}, ${j.location.longitude}).`;
+      document.querySelector('#ip-info a').innerText = info;
+      localStorage.setItem('ip_info', JSON.stringify([Date.now(), info]));
+    });
 }
 
 /* Get libname if brush is not a default library, else return undefined */
@@ -54,24 +61,24 @@ function doHighlight() {
   if (libname !== undefined) {  // not a default library
     reminder = `<p>* Reminder: "${brush}" is not within the default
       <a href="https://highlightjs.org/download/">34 languages</a>
-      contained in the prebuilt CDN.<br>Be sure to include
-      <b>${libname}</b> if you are using highlight.js from CDN.`;
+      contained in the prebuilt CDN!<br>Be sure to include
+      <b>${libname}</b> if you are using highlight.js from CDN`;
     html += `<script src="${CDN}/${jsToMinjs(libname)}">\x3c/script>`;
 
     if (dependency !== undefined) {
       const deps = `<b>${dependency.join('</b>, <b>')}</b>`;
-      reminder += `<br>... as well as its dependencies ${deps}.`;
+      reminder += `, as well as its dependency(s) ${deps}`;
       dependency.forEach((dep) => {
         html += `<script src="${CDN}/${jsToMinjs(dep)}">\x3c/script>`;
       });
     }
-    reminder += '</p>';
-    document.getElementById('hl-reminder').innerHTML = reminder;
+    reminder += '.</p>';
   }
   html += `<script>hljs.initHighlightingOnLoad();\x3c/script></head>
     <body><pre><code class="${brush}">${escapeTags(code)}</code></pre>
     \x3c/body>\x3c/html>`;
 
+  document.getElementById('hl-reminder').innerHTML = reminder;
   const result = document.getElementById('hl-result');
   result.hidden = false;
   result.srcdoc = html;

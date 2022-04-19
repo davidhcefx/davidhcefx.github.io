@@ -28,7 +28,7 @@
 
   <p style="margin-bottom: 3em">
     <a href="https://github.com/davidhcefx" class="Red-link"><b>davidhcefx</b></a><i>, A student from Taiwan who loves computer science.</i>
-    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" class="Dark-dim" id="taiwan-map" title="Taiwan, a small island country with over 23 million people, has the world's largest user base of Traditional Chinese characters.">
+    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" class="Dark-dim" id="taiwan-map" title="Taiwan, a small island country with over 23 million people, has the world's largest user base of traditional Chinese characters (·±ów×Ö).">
   </p>
 
   <h3>Works</h3>
@@ -38,9 +38,9 @@
     <!-- Ideally be easy to understand and impressive...  -->
     <img src="res/identicon.png" alt="davidhcefx/identicon" class="Dark-inv">
     <div>
-      <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (Github-like)</a></h5>
+      <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (GitHub-like)</a></h5>
       <p>
-        An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how Github generates each user's Identicon, it's not too hard to make one. :-)
+        An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how GitHub generates each user's Identicon, it's not too hard to make one. :-)
       </p>
     </div>
   </div>
@@ -118,7 +118,9 @@
   </p>
 
   <script>
-    fetchIP();
+    if (document.domain != '') {
+      fetchIP();
+    }
     // Add links to make images clickable
     (() => {
       document.querySelectorAll('.Work > img').forEach((img) => {

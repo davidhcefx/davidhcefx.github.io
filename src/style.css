@@ -71,6 +71,7 @@ textarea {
   /* prevent elements from overflowing */
   max-width: 100%;
   background-color: inherit;
+  color: var(--body-color);
 }
 
 .Red-link, .Red-link:hover {
