@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Highlight.js Online Testing Tool | davidhcefx</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Test highlight.js for syntax highlighting online! Change different styles and pick your favorite look.">
+  <link href="res/favicon.ico" rel="icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <script src="src/script.js"></script>
+  <style>
+    body {
+      margin: 1% 1% 0 1%;
+      text-align: center;
+    }
+    h2 {
+      margin-bottom: 1em;
+    }
+    textarea {
+      max-width: 100%;
+      font-size: 14px;
+      font-family: monospace;
+    }
+    table {
+      display: inline;
+      margin-right: 2em;
+    }
+    .Noscroll {
+      resize: none;
+    }
+    #hl-result {
+      /*width: 600px;*/
+      width: 40em;
+      max-width: 100%;
+      margin: 1em 0;
+    }
+    #hl-reminder {
+      margin: 0 22%;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Highlight.js Online Testing Tool <span id="version"></span></h2>
+
+  <div>
+    <textarea id="hl-code" rows="10" cols="60" placeholder="Paste some code here..."></textarea>
+  </div>
+
+  <div>
+    <table>
+      <tr>
+        <td>Specify a <a href="https://highlightjs.org/download/#download-form">language</a>: </td>
+        <td><textarea id="hl-lang" rows="1" cols="16" class="Noscroll" placeholder="auto"></textarea><br></td>
+      </tr>
+      <tr>
+        <td>Choose a <a href="https://highlightjs.org/static/demo/">style</a>: </td>
+        <td><textarea id="hl-style" rows="1" cols="16" class="Noscroll" placeholder="monokai-sublime"></textarea></td>
+      </tr>
+      </tr>
+    </table>
+    <button class="btn btn-outline-primary" onclick="doHighlight()">Go</button>
+  </div>
+
+  <iframe id="hl-result" onload="resizeHeight(this)" srcdoc="<div style='background: #23241f; padding: 5em'></div>"></iframe>
+
+  <div>
+    <p id="hl-reminder"><i></i></p>
+  </div>
+
+  <script>
+    // insert version to the title
+    document.getElementById('version').innerText = `(${CDN_VER})`;
+  </script>
+</body>
