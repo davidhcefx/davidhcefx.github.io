@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>Welcome | davidhcefx</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Welcome to davidhcefx's website!">
   <link href="res/favicon.ico" rel="icon">
@@ -28,7 +29,7 @@
 
   <p style="margin-bottom: 3em">
     <a href="https://github.com/davidhcefx" class="Red-link"><b>davidhcefx</b></a><i>, A student from Taiwan who loves computer science.</i>
-    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" class="Dark-dim" id="taiwan-map" title="Taiwan, a small island country with over 23 million people, has the world's largest user base of traditional Chinese characters (·±ów×Ö).">
+    <img src="res/Taiwan_map.jpg" alt="where is Taiwan" class="Dark-dim" id="taiwan-map" title="Taiwan, a small island country with over 23 million people, has the world's largest user base of traditional Chinese characters (ç¹é«”å­—).">
   </p>
 
   <h3>Works</h3>
@@ -38,7 +39,9 @@
     <!-- Ideally be easy to understand and impressive...  -->
     <img src="res/identicon.png" alt="davidhcefx/identicon" class="Dark-inv">
     <div>
-      <h5><a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (GitHub-like)</a></h5>
+      <h5>
+        <a href="https://github.com/davidhcefx/Identicon-Github-like">Identicon Generator (GitHub-like)</a><span class="Date">2019.04</span>
+      </h5>
       <p>
         An Identicon is an icon that contains a hash value representing part of your identity. Although it is not known how GitHub generates each user's Identicon, it's not too hard to make one. :-)
       </p>
@@ -47,7 +50,9 @@
   <div class="Work">
     <img src="res/nanorc.png" alt="davidhcefx/nanorc">
     <div>
-      <h5><a href="https://github.com/davidhcefx/Modern-Nano-Keybindings">Modern Nano Keybindings</a></h5>
+      <h5>
+        <a href="https://github.com/davidhcefx/Modern-Nano-Keybindings">Modern Nano Keybindings</a><span class="Date">2020.01</span>
+      </h5>
       <p>
         This is by far <span style="font-size: 10px">(2020)</span> the most comprehensive keybinding file for nano! It has lots of mainstream keystrokes (^C, ^Z, ^Q) as well as vim-like support (^F, ^G). Another plus is that it is still up-to-date with the latest nano :)
       </p>
@@ -56,7 +61,9 @@
   <div class="Work">
     <img src="res/nano.png" alt="gnu nano logo" class="Dark-dim">
     <div>
-      <h5><a href="https://github.com/davidhcefx/GNU_nano_5.4_nosearchwrap">GNU nano - nosearchwrap</a></h5>
+      <h5>
+        <a href="https://github.com/davidhcefx/GNU_nano_5.4_nosearchwrap">GNU nano - nosearchwrap</a><span class="Date">2020.12</span>
+      </h5>
       <p>
         While performing textual search, many editors, for instance Sublime, support toggling the option <b>Wrap</b>, which is to wrap past end-of-file and proceed searching. It will be nice if Nano can have this too!
       </p>
@@ -65,18 +72,22 @@
   <div class="Work">
     <img src="res/nano.png" alt="gnu nano logo" class="Dark-dim">
     <div>
-      <h5><a href="https://github.com/davidhcefx/GNU_nano_6.2_Set-Tabsize-Dynamically">GNU nano - Set Tabsize Dynamically</a></h5>
+      <h5>
+        <a href="https://github.com/davidhcefx/GNU_nano_6.2_Set-Tabsize-Dynamically">GNU nano - Set Tabsize Dynamically</a><span class="Date">2022.03</span>
+      </h5>
       <p>
         Some files use two spaces for indentation (eg. HTML), while others use four (eg. Python). In the middle of editing a file, I always wish I could change the <b>tab width</b> without reopening the file (= loss of history). This patch achieves our goal!
       </p>
     </div>
   </div>
   <div class="Work">
-    <img src="res/trash.png" alt="davidhcefx/Trash" class="Dark-inv">
+    <img src="res/Wikipedia3.png" alt="wikipedia logo" class="Dark-dim">
     <div>
-      <h5><a href="https://github.com/davidhcefx/My-Bash-Scripts/tree/master/Cygwin%20rm%20Move%20to%20RecycleBin">Trash - A rm replacement on Cygwin</a></h5>
+      <h5>
+        <a href="https://github.com/davidhcefx/Wikipedia-Duplicated-Citations-Merger">Wikipedia Duplicated Citations Merger</a><span class="Date">2022.04</span>
+      </h5>
       <p>
-        Ever worried about accidentally deleting something and not being able to recover it? Here are the ways to replace the native rm with a safer version of deleting files via moving it to the Trash bin.
+        The correct way of citing the same source more than once is by using <i>named references</i>, instead of simply copying and pasting the code. Unfortunately, it's common to spot <b>duplicated citations</b> in the wild. This tool works by merging duplicated citations, which not only reduces some text, but also prevents the <i>reference list</i> from bloating.
       </p>
     </div>
   </div>
@@ -121,13 +132,13 @@
     if (document.domain != '') {
       fetchIP();
     }
-    // Add links to make images clickable
-    (() => {
-      document.querySelectorAll('.Work > img').forEach((img) => {
-        const html = `<a href="${img.src}">${img.outerHTML}</a>`;
-        img.outerHTML = html;
-      });
-    })();
+    // Make links open in new window
+    document.querySelectorAll('a').forEach((a) => a.target = '_blank');
+    // Make images clickable
+    document.querySelectorAll('.Work > img').forEach((img) => {
+      const a = `<a href="${img.src}" target="_blank">${img.outerHTML}</a>`;
+      img.outerHTML = a;
+    });
     // Konami code
     Konami(() => {
       const h = document.lastChild;

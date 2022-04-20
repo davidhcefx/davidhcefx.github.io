@@ -87,18 +87,35 @@ textarea {
 .Work {
   background-color: var(--work-background-color);
   display: flex;
+  align-items: center;
   margin-bottom: 1em;
 }
 
 .Work img {
   width: 160px;
+  background-color: var(--body-background-color);
   border: 2px solid #aaa;
   border-radius: 8px;
+  transition: 0.3s;
+}
+
+.Work img:hover {
+  opacity: 80%;
 }
 
 .Work > div {
-  align-self: center;
-  margin-left: 30px
+  width: 100%;
+  margin-left: 30px;
+  margin-right: 1%;
+}
+
+.Work > div p {
+  margin-bottom: 0;
+}
+
+.Date {
+  float: right;
+  font-size: 0.8rem;
 }
 
 .Dark-inv {
