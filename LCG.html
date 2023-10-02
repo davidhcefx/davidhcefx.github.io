@@ -70,18 +70,19 @@
   <h1>Linear Congruential Generator</h1>
   <hr>
 
-  <p>The formula is as follows:</p>
+  <p>Linear Congruential Generator (LCG) is an algorithm that yields a sequence of pseudo-randomized numbers calculated with a discontinuous piecewise linear equation. (source: wikipedia)<br>
+  Anyway, here's the fomula:</p>
   <pre>
 function f(Si) {
   return (a * Si + b) mod N
 }</pre>
 
   <p>
-    Basically, <code>a</code>, <code>b</code>, and <code>N</code> are the coefficients of the Random Number Generator (RNG).<br>
-    In round 1, <code>S1</code> will be plugged in, producing output <code>S2</code>, which will then be the input of round 2. By gathering all the outputs, we will have a sequence of random numbers.
+    In short, <code>a</code>, <code>b</code>, and <code>N</code> are the coefficients of the random number generator (RNG).<br>
+    So in round 1, <code>S1</code> will be plugged in, and produce the output <code>S2</code>. Then in the next round, <code>S2</code> will become the input and produce <code>S3</code>, so on and so forth. By gathering all the outputs, we got a sequence of random numbers!
   </p>
   <p>
-    The question is, can we crack this RNG? That is, can we find out the coefficients <code>a</code>, <code>b</code>, and <code>N</code> by simply observing the generated outputs? Let's check it out:
+    <b>The question is, can we crack this RNG?</b> That is, can we determine the coefficients (<code>a</code>, <code>b</code>, and <code>N</code>) by simply observing the output sequence? Let's check it out!
   </p>
   <hr>
 
@@ -189,9 +190,8 @@ Si+6 = 54253663</pre>
       const Si = $('#Si')[0];
       const res = (a * parseInt(Si.value) + b) % N;
       // set result to next Si
-      Si.value = res;
-      autoscale(Si);
-
+      // Si.value = res;
+      // autoscale(Si);
       return res;
     }
 
